@@ -4,6 +4,8 @@ import { useDndMonitor } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import TaskCard from './TaskCard';
 
+import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
+
 export function SortableTask({ id, task, handleDelete, userId, handleEdit }) {
   const [isDragging, setIsDragging] = useState(false);
   const {
@@ -33,8 +35,34 @@ export function SortableTask({ id, task, handleDelete, userId, handleEdit }) {
   };
 
   return (
-    <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <TaskCard task={task} handleDelete={handleDelete} userId={userId} handleEdit={handleEdit} />
-    </div>
+   <div className='border border-black'>
+     <div ref={setNodeRef} style={style} {...attributes} {...listeners} className='hidden sm:block' >
+      <TaskCard task={task}  />      
+     </div>
+     <div  className='block sm:hidden'>
+      <TaskCard task={task}  />      
+     </div>
+    <div className="flex justify-between items-center mb-2 pl-4 pr-4">
+        <div className="flex space-x-2 mt-4">
+          <button onClick={() => handleEdit(task)} className="icon_btn">
+            <HiOutlinePencil className="h-4 w-4" />
+          </button>
+          <button onClick={() => handleDelete(task._id, userId)} className="icon_btn">
+            <HiOutlineTrash className="h-4 w-4" />
+          </button>
+        </div>
+        <div className="flex justify-end mt-4">
+          <select
+            value={task.status}
+            onChange={(e) => handleStatusChange(task.id, e.target.value)}
+            className="px-2 py-1 rounded border border-gray-300 text-sm"
+          >
+            <option value="todo">To Do</option>
+            <option value="inProgress">In Progress</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+      </div>
+   </div>
   );
 }

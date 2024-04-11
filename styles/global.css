@@ -559,9 +559,25 @@ body {
   border-left: 1px solid ;
   border-right: 1px solid ;
 }
+.tabs-bottom {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid ;
+  border-left: 1px solid ;
+  border-right: 1px solid ;
+}
 
 /* Style for each tab button */
 .tabs button {
+  padding: 10px 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+.tabs-bottom button {
   padding: 10px 20px;
   border: none;
   background-color: transparent;
@@ -575,6 +591,12 @@ body {
 /* Style for the active tab button */
 .tabs button.active {
   border-bottom: 3px solid #007bff;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.tabs-bottom button.active {
+  border-top: 3px solid #007bff;
   color: #007bff;
   font-weight: bold;
 }

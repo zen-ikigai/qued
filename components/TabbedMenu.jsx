@@ -36,9 +36,9 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
       <div className="tabs">
         {['today', 'all', 'overdue', 'calendar'].map((tab) => (
           <button key={tab} className={activeTab === tab ? 'active' : ''} onClick={() => setActiveTab(tab)}>
-            {tab === 'today' && "Today's Task"}
-            {tab === 'all' && "All Tasks"}
-            {tab === 'overdue' && "Overdue Tasks"}
+            {tab === 'today' && "Today"}
+            {tab === 'all' && "All"}
+            {tab === 'overdue' && "Overdue"}
             {tab === 'calendar' && <HiCalendar className='w-5 h-5'/>}
           </button>
         ))}
@@ -55,13 +55,14 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
         <TaskBoard tasks={filterTasks(activeTab)} setTasks={setTasks} userId={userId} fetchTasks={fetchTasks} handleDelete={handleDelete} handleEdit={handleEdit} />
       </div>
 
-      <div className="tabs block sm:hidden">
-        {['today', 'all', 'overdue', 'calendar'].map((tab) => (
+      <div className="tabs-bottom ">
+        {['calendar', 'today', 'all', 'overdue'].map((tab) => (
           <button key={tab} className={activeTab === tab ? 'active' : ''} onClick={() => setActiveTab(tab)}>
-            {tab === 'today' && "Today's Task"}
-            {tab === 'all' && "All Tasks"}
-            {tab === 'overdue' && "Overdue Tasks"}
             {tab === 'calendar' && <HiCalendar className='w-5 h-5'/>}
+            {tab === 'today' && "Today"}
+            {tab === 'all' && "All"}
+            {tab === 'overdue' && "Overdue"}
+            
           </button>
         ))}
       </div>
