@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
         <Provider>
           <div className='app'>
             <Nav/>
-            <main className='flex-grow mt-10'> 
+            <main className='flex-grow'> 
               {children}
             </main>
             <Footer/>

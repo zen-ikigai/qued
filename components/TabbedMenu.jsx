@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import TaskBoard from './desktopTaskView/TaskBoard';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Default styling, you can customize it
+import { HiCalendar } from 'react-icons/hi';
 
 const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleEdit }) => {
   const [activeTab, setActiveTab] = useState('today');
@@ -38,7 +39,7 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
             {tab === 'today' && "Today's Task"}
             {tab === 'all' && "All Tasks"}
             {tab === 'overdue' && "Overdue Tasks"}
-            {tab === 'calendar' && "Calendar"}
+            {tab === 'calendar' && <HiCalendar className='w-5 h-5'/>}
           </button>
         ))}
       </div>
@@ -46,7 +47,7 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
       {/* Tab Content */}
       <div className="tab-content">
         {activeTab === 'calendar' && (
-          <div style={{ marginBottom: '20px' }}>
+          <div className='mb-5 flex-center'>
             <Calendar onChange={setSelectedDate} value={selectedDate} />
           </div>
         )}

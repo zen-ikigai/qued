@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HiOutlinePencilAlt, HiPencil } from 'react-icons/hi';
+import { HiOutlinePencilAlt, HiPencil, HiPlusCircle } from 'react-icons/hi';
 import TaskModal from './TaskModal';
 import { useSession } from 'next-auth/react';
 
@@ -16,8 +16,11 @@ const CreateTaskIcon = ({ fetchTasks }) => {
   return (
     <div>
       {/* Pencil Icon */}
-      <div className="create-task-icon" onClick={toggleModal}>
-        <HiOutlinePencilAlt className='w-10 h-10'/>
+      <div className="create-task-icon sm:flex hidden" onClick={toggleModal}>
+        <HiPlusCircle className='w-10 h-10'/>
+      </div>
+      <div className="create-task-icon-mobile sm:hidden" onClick={toggleModal}>
+        <HiPlusCircle className='w-8 h-8'/>
       </div>
 
       {/* New Task Modal */}

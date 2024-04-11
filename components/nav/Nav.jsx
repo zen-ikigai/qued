@@ -6,6 +6,7 @@ import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 import { HiHome, HiSearch, HiBookmark, HiPlusCircle, HiArrowSmUp, HiCheckCircle, HiOutlineHome, HiOutlineSearch, HiOutlineBookmark, HiOutlinePlusCircle, HiMail, HiOutlineMail, HiOutlineLogout, HiSearchCircle, HiArrowRight, HiLogout, HiQuestionMarkCircle, HiOutlineQuestionMarkCircle} from "react-icons/hi";
 import { usePathname } from "next/navigation";
 
+
 const Nav = () => {
 
 
@@ -34,23 +35,23 @@ const Nav = () => {
   
 
   return (
-    <nav className="flex-between w-full pt-3 mt-2 font-mono ">   
+    <nav className="flex-between w-full mb-16 pt-3 mt-2 font-mono">   
 
         {session?.user ? (
           <Link href="/dashboard" className="flex gap-2 items-center">
-            <Image priority src="/assets/logo_tr.png" alt="DoEase logo" width={45} height={45} className="object-contain" />
+            <Image src="/assets/logo_tr.png" alt="DoEase logo" width={45} height={45} className="object-contain" />
             <p className="logo_text">DoEase</p>
           </Link>
         ) : (
           <Link href="/" className="flex gap-2 items-center">
-            <Image priority src="/assets/logo_tr.png" alt="DoEase logo" width={45} height={45} className="object-contain" />
+            <Image src="/assets/logo_tr.png" alt="DoEase logo" width={45} height={45} className="object-contain" />
             <p className="logo_text">DoEase</p>
           </Link>
         )}
       
 
       {/* Desktop Navigation */}
-      <div className="flex justify-between items-center">
+      <div className="sm:flex hidden">
         {session?.user ? (         
         <>         
           <div className="flex gap-3 md:gap-5">  
@@ -97,7 +98,68 @@ const Nav = () => {
       </div> 
 
       {/* Mobile Navigation */}
-      
+      <div className="sm:hidden flex flex-end  w-full gap-5 z-10">
+       
+        {session?.user ? (        
+            <>              
+              <button
+                  type="button"                  
+                  onClick={() => {
+                    handleSignout();
+                  }}
+                >
+                  <HiLogout className="nav-icon text-black" />
+                </button> 
+            </>     
+        ) : (
+          <div className="flex gap-3 md:gap-5">    
+            {providers &&
+              Object.values(providers).map((provider) => (
+                <button
+                  type="button"
+                  key={provider.name}
+                  onClick={() => handleSignin(provider.id)}
+                  className="black_btn_mono"
+                >
+                  Join Now <HiArrowRight className='ml-2'/> 
+                </button>
+              ))}
+          </div>
+        )}
+
+        <div className="fixed bottom-0 left-0 w-full bg-black border-t border-gray-200">
+          {/* Mobile Navigation Icons */}
+          {session?.user 
+          ? (
+            <div className="flex justify-evenly py-3">
+              <Link href="/dashboard" >
+                <HiHome size={24} className={`hover:text-white flex items-center ${pathname == "/dashboard" ? "text-white" : "text-gray-500"}`}/>
+              </Link>
+              
+              <Link href="/profile" className={`hover:text-white flex items-center ${pathname == "/profile" ? "text-white" : "text-gray-500"}`}>
+                <Image src={`data:image/png;base64,${session?.user?.image}`} width={24} height={24} className="rounded-full" alt="profile" />
+              </Link>
+              <button type="button" onClick={handleScrollToTop} className="text-gray-500 hover:text-white flex items-center"> 
+                <HiArrowSmUp size={24} />
+              </button>
+            </div>
+          )
+          : (
+            <div className="flex justify-evenly py-3">
+              <Link href="/" >
+                <HiHome size={24} className={`hover:text-white flex items-center ${pathname == "/" ? "text-white" : "text-gray-700"}`}/>
+              </Link>
+              <Link href="/features" >
+                <HiCheckCircle size={24} className={`hover:text-white flex items-center ${pathname == "/features" ? "text-white" : "text-gray-700"}`}/>
+              </Link>
+              <button type="button" onClick={handleScrollToTop} className="text-gray-700 hover:text-white flex items-center"> 
+                <HiArrowSmUp size={24} />
+              </button>
+            </div>
+          )
+          }
+        </div>
+      </div>
 
     </nav>
   );

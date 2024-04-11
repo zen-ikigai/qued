@@ -123,13 +123,20 @@ const findContainerById = (containerId) => {
     
   return (
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <div className='flex gap-4'>
+      <div className='flex gap-4 sm:flex-row flex-col sm:min-h-[70vh] min-h-[60vh]'>
         {containers.map((container) => (
-          <div key={container.id} className="w-1/3 bg-gray-100 p-4 min-h-screen">
+          <div key={container.id} className=" w-full bg-gray-100 p-4 min-h-[20vh] ">
             <h2 className="font-bold text-lg">{container.status}</h2>
             <SortableContext items={container.tasks.map((task) => task._id)} strategy={verticalListSortingStrategy}>
               {container.tasks.map((task) => (
-                <TaskCard key={task._id} id={task._id} task={task} handleDelete={handleDelete} userId={userId} handleEdit={handleEdit} />
+                <React.Fragment key={task._id}>
+                  <div className='hidden sm:block '>
+                    <SortableTask key={task._id} id={task._id} task={task} handleDelete={handleDelete} userId={userId} handleEdit={handleEdit} />
+                  </div>
+                  <div className='block sm:hidden'>
+                    <TaskCard key={task._id} id={task._id} task={task} handleDelete={handleDelete} userId={userId} handleEdit={handleEdit} />
+                  </div>
+                </React.Fragment>
               ))}
               {container.tasks.length === 0 && <DroppableArea id={container.id} />}
             </SortableContext>

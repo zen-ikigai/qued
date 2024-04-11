@@ -603,6 +603,14 @@ body {
   z-index: 1000; /* Ensure it's above other content */
 }
 
+.create-task-icon-mobile {
+  position: fixed;
+  bottom: 60px;
+  right: 30px;
+  cursor: pointer;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
 
 .modal-backdrop {
   position: fixed;

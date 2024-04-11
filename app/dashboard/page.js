@@ -52,9 +52,9 @@ const Dashboard = () => {
     };
 
   return (
-    <>
+    <section className="min-w-[90vw]">
         <TabbedMenu tasks={tasks} setTasks={setTasks} userId={session?.user.id} fetchTasks={fetchTasks} handleDelete={handleDelete} handleEdit={handleEdit}/>
-        <CreateTaskIcon fetchTasks={fetchTasks}  />
+        <CreateTaskIcon fetchTasks={fetchTasks} />
         {isEditModalOpen && <TaskModal 
           buttonName='Edit Task' 
           heading='Edit Task' 
@@ -65,7 +65,7 @@ const Dashboard = () => {
           taskToEdit={currentTask}
 
           />}
-    </>
+    </section>
   )
 }
 
