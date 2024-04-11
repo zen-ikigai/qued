@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 
 const Profile = ({ tasks }) => {
-  // Dummy data
+  
  
   const { data : session, status, update } = useSession();
   const completedTasksCount = tasks.filter(task => task.status === 'done').length;
@@ -57,11 +57,13 @@ const Profile = ({ tasks }) => {
   
 
   return (
-    <div className="profile-container">
-      <div className="profile-header">
+    <div className="profile-container min-w-[80vw] font-mono">
+      <div className="flex items-center gap-4">
         <img src={`data:image/png;base64,${session?.user?.image}`} alt="Profile" className="profile-image" />
-        <h1 className="username">{session?.user.username}</h1>
-        <p className="email">{session?.user.email}</p>
+        <div>
+          <h1 className="text-2xl">{session?.user.username}</h1>
+          <p className="text-sm">{session?.user.email}</p>
+        </div>
       </div>
 
       <div className="profile-stats">
@@ -80,7 +82,7 @@ const Profile = ({ tasks }) => {
      
       </div>
 
-      <div className="profile-actions">
+      <div className="profile-actions flex sm:flex-row flex-col">
         <button className="delete-btn" onClick={handleDeleteAllTasks}>Delete All Tasks</button>
         <button className="delete-btn" onClick={handleDeleteProfile}>Delete Account</button>
       </div>

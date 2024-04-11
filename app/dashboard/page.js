@@ -51,9 +51,43 @@ const Dashboard = () => {
       setIsEditModalOpen(true);  // Open the modal
     };
 
+    
+    const handleStatusChange = async (taskId, newStatus) => {
+      
+      setTasks(prevTasks =>
+        prevTasks.map(task => task._id === taskId ? { ...task, status: newStatus } : task)
+      );
+
+      try {
+        // API call to update the status in the backend
+        const response = await fetch(`/api/task/${taskId}/changestatus?userId=${session?.user.id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: newStatus }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to update task status');
+        }
+      } catch (error) {
+        console.error('Error updating task status:', error);
+        // Rollback to previous state in case of an error
+        setTasks(prevTasks =>
+          prevTasks.map(task => task._id === taskId ? { ...task, status: task.status } : task)
+        );
+      }
+    };
+
+    
+
   return (
     <section className="min-w-[90vw]">
-        <TabbedMenu tasks={tasks} setTasks={setTasks} userId={session?.user.id} fetchTasks={fetchTasks} handleDelete={handleDelete} handleEdit={handleEdit}/>
+        <TabbedMenu tasks={tasks} setTasks={setTasks} 
+        userId={session?.user.id} fetchTasks={fetchTasks} 
+        handleDelete={handleDelete} handleEdit={handleEdit}
+        handleStatusChange={handleStatusChange}
+
+        />
         <CreateTaskIcon fetchTasks={fetchTasks} />
         {isEditModalOpen && <TaskModal 
           buttonName='Edit Task' 

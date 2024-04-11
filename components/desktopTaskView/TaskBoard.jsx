@@ -23,7 +23,7 @@ const DroppableArea = ({ id }) => {
 
 // make droppable area full box width and height
 
-const TaskBoard = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleEdit }) => {
+const TaskBoard = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleEdit, handleStatusChange }) => {
   const [containers, setContainers] = useState([
     { id: 'todo', status: 'todo', name: 'To Do', bgColor:'bg-red-100', titleColor: 'bg-red-300', tasks: [] },
     { id: 'inProgress', status: 'inProgress', name: 'In Progress', bgColor:'bg-yellow-100', titleColor: 'bg-yellow-300', tasks: [] },
@@ -132,7 +132,7 @@ const findContainerById = (containerId) => {
             <h2 className={`font-bold text-lg text-center ${container.titleColor} p-2`}>{container.name}</h2>
             <SortableContext items={container.tasks.map((task) => task._id)} strategy={verticalListSortingStrategy}>
               {container.tasks.map((task) => (        
-                <SortableTask key={task._id} id={task._id} task={task} handleDelete={handleDelete} userId={userId} handleEdit={handleEdit} />
+                <SortableTask key={task._id} id={task._id} task={task} handleDelete={handleDelete} userId={userId} handleEdit={handleEdit} handleStatusChange={handleStatusChange}/>
               ))}
               {container.tasks.length === 0 && <DroppableArea id={container.id} />}
             </SortableContext>

@@ -6,7 +6,7 @@ import TaskCard from './TaskCard';
 
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
 
-export function SortableTask({ id, task, handleDelete, userId, handleEdit }) {
+export function SortableTask({ id, task, handleDelete, userId, handleEdit, handleStatusChange }) {
   const [isDragging, setIsDragging] = useState(false);
   const {
     attributes,
@@ -54,7 +54,7 @@ export function SortableTask({ id, task, handleDelete, userId, handleEdit }) {
         <div className="flex justify-end mt-4">
           <select
             value={task.status}
-            onChange={(e) => handleStatusChange(task.id, e.target.value)}
+            onChange={(e) => handleStatusChange(task._id, e.target.value)}
             className="px-2 py-1 rounded border border-gray-300 text-sm"
           >
             <option value="todo">To Do</option>

@@ -4,7 +4,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css'; // Default styling, you can customize it
 import { HiCalendar } from 'react-icons/hi';
 
-const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleEdit }) => {
+const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleEdit, handleStatusChange }) => {
   const [activeTab, setActiveTab] = useState('today');
   const [selectedDate, setSelectedDate] = useState(new Date());
   
@@ -52,7 +52,7 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
           </div>
         )}
         {/* Always render TaskBoard but pass filtered tasks based on activeTab and selectedDate for 'calendar' */}
-        <TaskBoard tasks={filterTasks(activeTab)} setTasks={setTasks} userId={userId} fetchTasks={fetchTasks} handleDelete={handleDelete} handleEdit={handleEdit} />
+        <TaskBoard tasks={filterTasks(activeTab)} setTasks={setTasks} userId={userId} fetchTasks={fetchTasks} handleDelete={handleDelete} handleEdit={handleEdit} handleStatusChange={handleStatusChange}/>
       </div>
 
       <div className="tabs-bottom ">
