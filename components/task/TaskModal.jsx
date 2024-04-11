@@ -11,7 +11,7 @@ const TaskModal = ({ fetchTasks, handleModal, apiEndpoint, buttonName, heading, 
         title: taskToEdit.title,
         description: taskToEdit.description,
         status: taskToEdit.status,
-        dueDate: taskToEdit.dueDate, // get the duedate correctly
+        dueDate: taskToEdit.dueDate, 
         reminder: taskToEdit.reminder || false,
       } 
   }
@@ -96,32 +96,42 @@ const handleChange = (e) => {
 
 
   return (
-    <div className="modal-backdrop">
-      <div className="modal">
-        <h2>{heading}</h2>
-        <form onSubmit={handleSubmit}>
+    <div className="modal-backdrop font-mono ">
+      <div className="modal bg-blue-100 border border-black">
+        <h2 className='text-3xl font-bold text-center'>{heading}</h2>
+        <form onSubmit={handleSubmit} className='p-5'>
           <label>Title</label>
           <input type="text" name="title" value={task.title} onChange={handleChange} required />
 
           <label>Description</label>
           <textarea name="description" value={task.description} onChange={handleChange} required />
 
-          <label>Status</label>
-          <select name="status" value={task.status} onChange={handleChange}>
-            <option value="todo">To Do</option>
-            <option value="inProgress">In Progress</option>
-            <option value="done">Done</option>
-          </select>
+          <div className='flex items-center justify-between mt-5'>
+            <div>
+              <label className='mr-5'>Status</label>
+              <select name="status" value={task.status} onChange={handleChange} required>
+                <option value="todo">To Do</option>
+                <option value="inProgress">In Progress</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
 
-          <label>Due Date</label>
-          <input type="date" name="dueDate" value={task.dueDate} onChange={handleChange} />
+           <div>
+            <label className='mr-5'>Due Date</label>
+              <input type="date" name="dueDate" value={task.dueDate} onChange={handleChange} required/>
+            </div>
+           </div>
 
-          <label>Set Reminder</label>
-          <input type="checkbox" name="reminder" checked={task.reminder} onChange={handleChange} />
+          <div className='items-center justify-center mt-5'>
+          <input type="checkbox" name="reminder" checked={task.reminder} onChange={handleChange} className='mr-2' />
+            <label>Set Reminder</label>            
+          </div>
 
 
-          <button type="submit">{buttonName}</button>
-          <button type="button" onClick={handleModal}>Cancel</button>
+         <div className='flex items-center justify-center mt-5 gap-5'>
+         <button type="submit" className='black_btn_mono'>{buttonName}</button>
+          <button type="button" className='outline_btn_mono' onClick={handleModal}>Cancel</button>
+         </div>
         </form>
       </div>
     </div>

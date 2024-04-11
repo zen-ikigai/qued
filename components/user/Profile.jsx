@@ -66,7 +66,7 @@ const Profile = ({ tasks }) => {
         </div>
       </div>
 
-      <div className="profile-stats">
+      <div className="profile-stats flex sm:flex-row flex-col items-center justify-center ">
         <div className="stat-item">
           <span className="stat-value">{session?.user.tasks.length}</span>
           <span className="stat-label">Total Tasks</span>
@@ -82,7 +82,7 @@ const Profile = ({ tasks }) => {
      
       </div>
 
-      <div className="profile-actions flex sm:flex-row flex-col">
+      <div className="profile-actions flex sm:flex-row flex-col items-center justify-center">
         <button className="delete-btn" onClick={handleDeleteAllTasks}>Delete All Tasks</button>
         <button className="delete-btn" onClick={handleDeleteProfile}>Delete Account</button>
       </div>
