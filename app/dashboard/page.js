@@ -4,6 +4,7 @@ import TabbedMenu from "@/components/TabbedMenu";
 import CreateTaskIcon from "@/components/task/CreateTask";
 import { useSession } from "next-auth/react";
 import TaskModal from "@/components/task/TaskModal";
+import Loading from "@/components/info/Loading";
 
 const Dashboard = () => {
     const { data: session, status, update } = useSession();
@@ -12,6 +13,7 @@ const Dashboard = () => {
     const [currentTask, setCurrentTask] = useState(null);
     const [isEditing, setIsEditing] = useState(true);
 
+    
     const fetchTasks = async () => {
       const response = await fetch(`/api/user/${session?.user.id}/gettasks`, {
         method: 'GET'
@@ -20,32 +22,40 @@ const Dashboard = () => {
       setTasks(data);
     };
 
+    
     useEffect(() => {
       if (session?.user) {
         fetchTasks();
       }
     }, [session]);
 
-    const handleDelete = async (taskId, userId) => {    
+    if (status === "loading" || !session ) {
+      return (
+        <Loading />
+      )
+    }
+    
+    const handleDelete = async (taskId, userId) => {
+      
+      const removedTask = tasks.find(task => task._id === taskId);
+      setTasks(prevTasks => prevTasks.filter(task => task._id !== taskId));
+    
       try {
-        console.log('Calling Delete Function')
         const response = await fetch(`/api/task/${taskId}/deletetask?userId=${userId}`, {
           method: 'DELETE',
         });
     
         if (!response.ok) {
           throw new Error('Failed to delete task');
-        } else{
-          console.log('deleted successfully')
         }
-
-        fetchTasks();
-        update(); 
+        
       } catch (error) {
         console.error('Error deleting task:', error);
-        
+        // Revert the UI back to its previous state by adding the removed task back
+        setTasks(prevTasks => [...prevTasks, removedTask]);
       }
     };
+    
     const handleEdit = (task) => {
       setCurrentTask(task); // Set the task to be edited
       setIsEditModalOpen(true);  // Open the modal
@@ -82,6 +92,7 @@ const Dashboard = () => {
 
   return (
     <section className="min-w-[90vw]">
+    
         <TabbedMenu tasks={tasks} setTasks={setTasks} 
         userId={session?.user.id} fetchTasks={fetchTasks} 
         handleDelete={handleDelete} handleEdit={handleEdit}

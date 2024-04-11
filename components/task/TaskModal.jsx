@@ -99,7 +99,7 @@ const handleChange = (e) => {
     <div className="modal-backdrop font-mono ">
       <div className="modal bg-blue-100 border border-black">
         <h2 className='text-3xl font-bold text-center'>{heading}</h2>
-        <form onSubmit={handleSubmit} className='p-5'>
+        <form onSubmit={handleSubmit} >
           <label>Title</label>
           <input type="text" name="title" value={task.title} onChange={handleChange} required />
 
@@ -108,7 +108,7 @@ const handleChange = (e) => {
 
           <div className='flex items-center justify-between mt-5'>
             <div>
-              <label className='mr-5'>Status</label>
+              <label className='mr-2'>Status</label>
               <select name="status" value={task.status} onChange={handleChange} required>
                 <option value="todo">To Do</option>
                 <option value="inProgress">In Progress</option>
@@ -117,7 +117,7 @@ const handleChange = (e) => {
             </div>
 
            <div>
-            <label className='mr-5'>Due Date</label>
+            <label className='mr-2'>Due Date</label>
               <input type="date" name="dueDate" value={task.dueDate} onChange={handleChange} required/>
             </div>
            </div>

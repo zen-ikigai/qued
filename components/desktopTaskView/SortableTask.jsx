@@ -5,9 +5,10 @@ import { CSS } from '@dnd-kit/utilities';
 import TaskCard from './TaskCard';
 
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi";
-
+ 
 export function SortableTask({ id, task, handleDelete, userId, handleEdit, handleStatusChange }) {
   const [isDragging, setIsDragging] = useState(false);
+  
   const {
     attributes,
     listeners,

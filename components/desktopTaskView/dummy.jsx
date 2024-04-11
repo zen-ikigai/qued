@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+//last restore point
+import React, { useEffect, useState } from 'react';
 import {
   DndContext,
   closestCenter,
@@ -6,10 +7,12 @@ import {
   useSensors,
   PointerSensor,
   KeyboardSensor,
-  DragOverlay,
   useDroppable,
 } from '@dnd-kit/core';
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 
 import { SortableTask } from './SortableTask';
 import TaskCard from './TaskCard';
@@ -25,7 +28,7 @@ const DroppableArea = ({ id, message }) => {
 };
 
 
-
+// make droppable area full box width and height
 
 const TaskBoard = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleEdit, handleStatusChange }) => {
   const [containers, setContainers] = useState([
@@ -34,8 +37,6 @@ const TaskBoard = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleEd
     { id: 'done', status: 'done', name: 'Done', bgColor:'bg-green-100', titleColor: 'bg-green-300', message:'No Tasks Done!', tasks: [] },
   ]);
   
-  const [activeId, setActiveId] = useState(null);
-  const [draggedItem, setDraggedItem] = useState(null);
 
   
   
@@ -52,20 +53,12 @@ const TaskBoard = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleEd
     useSensor(KeyboardSensor)
   );
 
-  const handleDragStart = (event) => {
-    const { active } = event;
-    setActiveId(active.id);
-    const item = tasks.find((task) => task._id === active.id);
-    setDraggedItem(item); // Store the item being dragged for the DragOverlay
-  };
-
   // Finds the container by task ID
   const findContainer = (taskId) => {
     return containers.find(container =>
       container.tasks.some(task => task._id === taskId)
     );
   };
-  
 
 // Finds the container by task ID
 const findContainerByTaskId = (taskId) => {
@@ -126,8 +119,7 @@ const findContainerById = (containerId) => {
         setTasks((prevTasks) => prevTasks.map(task => 
           task._id === movedTask._id ? { ...task, status: overContainer.status } : task
         ));
-        setActiveId(null); // Clear the activeId and draggedItem after drag ends
-        setDraggedItem(null);
+
 
       } catch (error) {
         console.error('Failed to update task status:', error);
@@ -140,25 +132,20 @@ const findContainerById = (containerId) => {
   
     
   return (
-    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+    <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
       <div className='flex gap-4 sm:flex-row flex-col sm:min-h-[70vh] min-h-[60vh] font-mono'>
         {containers.map((container) => (
-          <div key={container.id} className={`w-full p-4 min-h-[20vh] flex flex-col gap-4 ${container.bgColor}`}>
+          <div key={container.id} className={` w-full p-4 min-h-[20vh] flex flex-col gap-4 ${container.bgColor} `}>
             <h2 className={`font-bold text-lg text-center ${container.titleColor} p-2`}>{container.name}</h2>
             <SortableContext items={container.tasks.map((task) => task._id)} strategy={verticalListSortingStrategy}>
-              {container.tasks.map((task) => (
-                <SortableTask key={task._id} id={task._id} task={task} handleDelete={handleDelete} userId={userId} handleEdit={handleEdit} handleStatusChange={handleStatusChange} />
+              {container.tasks.map((task) => (        
+                <SortableTask key={task._id} id={task._id} task={task} handleDelete={handleDelete} userId={userId} handleEdit={handleEdit} handleStatusChange={handleStatusChange}/>
               ))}
-              {container.tasks.length === 0 && <DroppableArea id={container.id} message={container.message} />}
+              {container.tasks.length === 0 && <DroppableArea id={container.id} message={container.message}/>}
             </SortableContext>
           </div>
         ))}
       </div>
-      <DragOverlay>
-        {draggedItem && (
-          <SortableTask task={draggedItem} isDragging /> 
-        )}
-      </DragOverlay>
     </DndContext>
   );
 };

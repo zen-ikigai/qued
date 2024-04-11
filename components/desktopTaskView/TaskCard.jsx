@@ -19,7 +19,7 @@ const TaskCard = ({ task }) => {
   // remove the delete, edit and status change from here and move then to sortable task.
 
   return (
-    <div className=" border-b border-black p-4 text-black">
+    <div className=" border-b border-black p-4 text-black ">
       
       <div>
         <h3 className="text-lg font-bold">{task.title}</h3>

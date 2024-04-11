@@ -1,16 +1,25 @@
 'use client'
-import React from 'react';
+import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
-import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
 
-const Profile = ({ tasks }) => {
+import { signOut } from "next-auth/react";
+import Delete from '../info/deleteConfirmation';
+import Success from '../info/Success';
+import Failure from '../info/Failure';
+
+const Profile = ({ tasks, setLoading }) => {
   
  
   const { data : session, status, update } = useSession();
   const completedTasksCount = tasks.filter(task => task.status === 'done').length;
   const ongoingTasksCount = tasks.filter(task => task.status === 'inProgress').length;
-  const router = useRouter();
+  
+  const [deleteAllTasks, setDeleteAllTasks] = useState(false);
+  const [deleteProfile, setDeleteProfile] = useState(false);
+  const [successModalTasks, setSuccessModalTasks] = useState(false);
+  const [failureModalTasks, setFailureModalTasks] = useState(false);
+  const [failureModalProfile, setFailureModalProfile] = useState(false);
+  
 
   const handleSignout = async() => {
     await signOut({callbackUrl: "/"});
@@ -18,39 +27,54 @@ const Profile = ({ tasks }) => {
 
   const handleDeleteAllTasks = async () => {
     const userId = session?.user?.id; 
+    setLoading(true);
+    setDeleteAllTasks(false);
   
     try {
       const response = await fetch(`/api/user/${userId}/deletetasks`, {
         method: 'DELETE',
       });
   
-      if (!response.ok) {
-        throw new Error('Failed to delete all tasks');
-      }
-      update();
-      // Provide feedback to the user, maybe refresh the tasks or the page
+      if(response.ok){
+        setSuccessModalTasks(true);
+        setLoading(false);
+        update();
+      } else {
+        
+        setFailureModalTasks(true);
+        setLoading(false);
+    }
+      
     } catch (error) {
-      console.error('Error deleting all tasks:', error);
-      // Handle error (e.g., display an error message)
+      setFailureModalTasks(true);
+      setLoading(false);      
     }
   };
   
   const handleDeleteProfile = async () => {
     const userId = session?.user?.id; 
+    setLoading(true);
+    setDeleteProfile(false);
     try {
-      handleSignout();
+      
       const response = await fetch(`/api/user/${userId}/deleteprofile`, {
         method: 'DELETE',
       });
   
-      if (!response.ok) {
-        throw new Error('Failed to delete profile');
-      }
-      router.push('/')
-      // Log the user out or redirect them to a different page
+      if (response.ok) {
+        
+        handleSignout();
+        setLoading(false);
+        
+        
+    } else {
+        
+        setFailureModalProfile(true);
+        setLoading(false);
+    }
     } catch (error) {
-      console.error('Error deleting profile:', error);
-      // Handle error (e.g., display an error message)
+      setFailureModalProfile(true);
+      setLoading(false);
     }
   };
   
@@ -83,9 +107,49 @@ const Profile = ({ tasks }) => {
       </div>
 
       <div className="profile-actions flex sm:flex-row flex-col items-center justify-center">
-        <button className="delete-btn" onClick={handleDeleteAllTasks}>Delete All Tasks</button>
-        <button className="delete-btn" onClick={handleDeleteProfile}>Delete Account</button>
+        <button className="delete-btn" onClick={() => setDeleteAllTasks(true)}>Delete All Tasks</button>
+        {deleteAllTasks && (
+          <Delete 
+            title='Delete All Tasks'
+            message='Are you sure you want to Delete all Tasks?'
+            onClose={() => setDeleteAllTasks(false)}
+            handleDelete={handleDeleteAllTasks}
+          />
+        )}
+        {successModalTasks && (
+        <Success
+          title="Done"
+          message="All Tasks Deleted Successfully"
+          onClose={() => setSuccessModalTasks(false)}
+        />
+        )}
+        {failureModalTasks && (
+          <Failure
+            title="Failed"
+            message="Failed to delete all Tasks."
+            onClose={() => setFailureModalTasks(false)}
+          />
+        )}
+        
+       
+        <button className="delete-btn" onClick={() => setDeleteProfile(true)}>Delete Account</button>
+        {deleteProfile && (
+          <Delete 
+            title='Delete Profile'
+            message='Are you sure you want to Delete your Profile?'
+            onClose={() => setDeleteProfile(false)}
+            handleDelete={handleDeleteProfile}
+          />
+        )}
+        {failureModalProfile && (
+          <Failure
+            title="Failed"
+            message="Failed to delete Profile."
+            onClose={() => setFailureModalProfile(false)}
+          />
+      )}
       </div>
+      
     </div>
   );
 };

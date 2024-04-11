@@ -2,11 +2,12 @@
 import React, { useEffect, useState } from 'react'
 import Profile from '@/components/user/Profile'
 import { useSession } from 'next-auth/react';
+import Loading from '@/components/info/Loading';
 
 const ProfilePage = () => {
   const { data: session, status, update } = useSession();
   const [tasks, setTasks] = useState([]);
-
+  const [loading, setLoading] = useState(false);
 
   const fetchTasks = async () => {
     const response = await fetch(`/api/user/${session?.user.id}/gettasks`, {
@@ -20,8 +21,14 @@ const ProfilePage = () => {
     fetchTasks();
   }, [session]);
 
+  if (status === "loading" || !session || loading) {
+    return (
+      <Loading />
+    )
+  }
+
   return (
-    <Profile tasks={tasks}/>
+    <Profile tasks={tasks} setLoading={setLoading}/>
   )
 }
 

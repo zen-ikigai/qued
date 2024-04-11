@@ -47,7 +47,7 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
       {/* Tab Content */}
       <div className="tab-content">
         {activeTab === 'calendar' && (
-          <div className='mb-5'>
+          <div className='mb-5 flex items-center justify-center'>
             <Calendar onChange={setSelectedDate} value={selectedDate} />
           </div>
         )}
