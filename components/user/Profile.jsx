@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 
 import { signOut } from "next-auth/react";
-import Delete from '../info/deleteConfirmation';
+import Delete from '../info/DeleteConfirmation';
 import Success from '../info/Success';
 import Failure from '../info/Failure';
 
