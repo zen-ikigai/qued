@@ -1,0 +1,764 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.flex-grow {
+    flex: 1;
+}
+
+/*
+Scrollbar customisation inspire from dev.to
+*/
+
+:root {
+  --primary: white;
+  --secondary: black ;
+  
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 13px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 14px;
+  border: 3px solid var(--primary);
+}
+
+
+/* 
+  Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
+*/
+.main {
+  width: 100%;
+  min-height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  padding: 120px 24px 160px 24px;
+  pointer-events: none;
+}
+
+.main:before {
+  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
+  position: absolute;
+  content: "";
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+.main:after {
+  content: "";
+  background-image: url("/assets/images/grid.svg");
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  opacity: 0.4;
+  filter: invert(1);
+}
+
+.gradient {
+  height: fit-content;
+  z-index: 3;
+  width: 100%;
+  max-width: 640px;
+  background-image: radial-gradient(
+      at 27% 37%,
+      hsla(215, 98%, 61%, 1) 0px,
+      transparent 0%
+    ),
+    radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
+    radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
+    radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
+    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
+    radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
+    radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  filter: blur(100px) saturate(150%);
+  top: 80px;
+  opacity: 0.15;
+}
+
+@media screen and (max-width: 640px) {
+  .main {
+    padding: 0;
+  }
+}
+
+/* unlock section starts */
+
+
+.blur-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 85vh;
+  width: 98vw;
+  z-index: 1;
+  overflow: hidden;
+  
+}
+
+.blur-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  z-index: 2;
+  top: 0;
+}
+.unlock-section {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  z-index: 3;
+}
+
+.lock-icon {
+  width: 40px;
+  height: 40px;
+  background-image: url("/assets/icons/lock.svg");
+  background-size: cover;
+}
+
+.unlock-text {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  /* Adjust dimensions for mobile screens */
+  .blur-section {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .unlock-section {
+    top: 50%;  /* Adjust positioning */
+    left: 50%;
+    width: 90%;
+    height: 25vh;  /* Let the content determine the height */
+    padding: 10px; /* Adjust padding */
+  }
+}
+
+@media (max-width: 576px) {
+  /* Adjust dimensions for smaller mobile screens */
+  .blur-section {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .unlock-section {
+    top: 50%;  /* Adjust positioning */
+    left: 50%;
+    width: 90%;
+    height: 25vh;  /* Let the content determine the height */
+    padding: 10px; /* Adjust padding */
+  }
+}
+
+/* unlock section ends */
+
+
+
+
+.opacity-10{
+  opacity: 0.1;
+}
+
+/* Tailwind Styles */
+
+.app {
+  @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
+}
+
+.black_btn {
+  @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
+}
+.black_btn_mono {
+  @apply rounded border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-mono flex items-center justify-center;
+}
+
+.outline_btn {
+  @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
+}
+
+.outline_btn_mono {
+  @apply rounded border border-black bg-blue-50 py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-mono flex items-center justify-center;
+
+}
+
+
+.tab_btn {
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+  color: #555555;
+}
+
+.tab_btn:hover {
+  border-color: #000000;
+}
+
+.tab_btn.active {
+  border-color: #000000;
+  color: #000000;
+}
+
+
+.head_text {
+  @apply mt-5 text-4xl font-extrabold leading-[1.15] text-black md:text-6xl;
+
+  @media screen and (max-width: 640px) {
+    width: 85%;
+    
+  }
+}
+
+.orange_gradient {
+  @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
+}
+
+
+
+.green_gradient {
+  @apply bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent;
+}
+
+.blue_gradient {
+  @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
+}
+
+.desc {
+  @apply mt-5 text-lg text-gray-600 sm:text-xl max-w-2xl;
+
+  @media screen and (max-width: 640px) {
+    width: 85%;
+    min-width: 85vw;
+  }
+}
+
+.search_input {
+  @apply block w-full rounded-md border border-gray-800  bg-white py-2.5 font-mono pl-5 pr-12 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
+
+  @media screen and (max-width: 640px) {
+    width: 90%;
+    min-width: 90vw;
+  }
+}
+
+.copy_btn {
+  @apply w-7 h-7 rounded-full bg-white/10 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex justify-center items-center cursor-pointer;
+}
+
+.icon_btn {
+  @apply w-7 h-7 rounded-full backdrop-blur flex justify-center items-center cursor-pointer;
+}
+
+.bookmark_btn {
+  @apply w-7 h-7 rounded-full bg-white/10 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex justify-center items-center cursor-pointer;
+}
+
+.glassmorphism {
+  @apply rounded-xl border border-gray-200 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-5;
+  @media screen and (max-width: 640px) {
+    width: 90%;
+    min-width: 90vw;
+  }
+}
+
+.prompt_layout {
+  @apply space-y-6 py-8 sm:columns-2 sm:gap-6 xl:columns-3;
+}
+
+/* Feed Component */
+.feed {
+  @apply mt-0 mx-auto w-full max-w-xl flex justify-center items-center flex-col gap-2;
+}
+
+/* Form Component */
+.form_textarea {
+  @apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 outline-0;
+}
+
+.form_input {
+  @apply w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0;
+}
+
+/* Nav Component */
+.logo_text {
+  @apply  font-mono font-semibold text-lg text-black tracking-wide;
+}
+
+.dropdown {
+  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end;
+}
+
+.dropdown_link {
+  @apply text-sm font-inter text-gray-700 hover:text-gray-500 font-medium;
+}
+
+/* PromptCard Component */
+.prompt_card {
+  @apply flex-1 break-inside-avoid border border-black bg-white/20 bg-clip-padding  backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
+
+  /* Mobile */
+  @media screen and (max-width: 640px) {
+    width: 90%;
+    min-width: 90vw;
+  }
+}
+
+
+.flex-center {
+  @apply flex justify-center items-center;
+}
+
+.flex-start {
+  @apply flex justify-start items-start;
+}
+
+.flex-end {
+  @apply flex justify-end items-center;
+}
+
+.flex-between {
+  @apply flex justify-between items-center;
+}
+
+.set-mobile {
+  @media screen and (max-width: 640px) {
+    width: 90%;
+    min-width: 90vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+
+
+html,
+body {
+  height: 100%;
+}
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+/* Vertical Nav*/
+.nav-vertical {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  z-index: 100;
+}
+
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  height: 20px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  margin-left: 8px;
+}
+
+.nav-item.top {
+  align-self: flex-center;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.nav-item.bottom {
+  align-self: flex-center;
+  margin-bottom: 10px;
+  margin-top: auto;
+}
+
+
+
+.nav-icon {
+  width: 20px;
+  height: 20px;  
+}
+
+
+.shift-left {
+  margin-left: 30px;
+
+  @media screen and (max-width: 640px) {
+    margin-left: 0;
+  }
+}
+
+/* Horizontal Nav */
+.nav-horizontal {
+  position: fixed;
+  top: 0;
+  left: 50px;
+  width: calc(100% - 50px);
+  height: 50px;
+  background-color: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 100;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0px;
+}
+
+.username {
+  font-size: small;
+}
+
+.email {
+  font-size: x-small;
+}
+
+.date-time {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0px;
+  align-items: flex-end;
+}
+
+.role-select {
+  display: flex;
+  flex-direction: row;
+  margin-left: 0px;
+  align-items: flex-end;  
+}
+
+.add-data-btn {
+  display: flex;
+  flex-direction: row;
+  margin-left: 0;
+  align-items: flex-end;  
+}
+
+.role-switcher {
+  width: 100px;
+  align-self: center;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  font-size: small;
+  margin-left: 10px;
+  color: #fff;
+  background-color: #000;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.role-switcher:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.role-option {
+  color: #fff;
+  background-color: #000;
+}
+
+.role-option:hover,
+.role-option:focus {
+  color: #fff;
+  border-color: #fff;
+  background-color: #000;
+}
+
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.nav-horizontal a {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  color: white;
+  text-decoration: none;
+}
+
+
+
+/* Container for the tab buttons */
+.tabs {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid ;
+  border-left: 1px solid ;
+  border-right: 1px solid ;
+}
+
+/* Style for each tab button */
+.tabs button {
+  padding: 10px 20px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+
+/* Style for the active tab button */
+.tabs button.active {
+  border-bottom: 3px solid #007bff;
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* Container for the content shown when a tab is selected */
+.tab-content {
+  padding: 20px;
+  border: 1px solid #000000;
+  
+}
+
+/* Basic styling for the TaskBoard for visual separation of tasks */
+.task-card {
+  margin-bottom: 10px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+}
+
+.create-task-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+}
+
+.modal h2 {
+  margin-top: 0;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal label {
+  margin-top: 10px;
+}
+
+.modal input[type="text"],
+.modal input[type="date"],
+.modal input[type="number"],
+.modal textarea,
+.modal select {
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal button {
+  margin-top: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal button[type="button"] {
+  background-color: #f8f9fa;
+}
+
+
+
+.profile-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f9f9fa;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  text-align: center;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  
+  object-fit: cover;
+}
+
+.username, .email {
+  margin: 10px 0;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+  padding-top: 20px;
+  border-top: 1px solid #e1e1e2;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.profile-actions {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #e1e1e2;
+}
+
+.delete-btn {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+/*Header Style*/
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;  
+  padding-left: 5%;
+  padding-right: 5%;
+  z-index: 1000;  
+  
+}
+
+.body-content {
+  padding-top: 100px; /* Adjust this value based on your header's height */
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #f8f8f8;
+  padding: 20px;
+  text-align: center;
+  margin-top: auto;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
