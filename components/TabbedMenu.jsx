@@ -47,12 +47,23 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
       {/* Tab Content */}
       <div className="tab-content">
         {activeTab === 'calendar' && (
-          <div className='mb-5 flex-center'>
+          <div className='mb-5'>
             <Calendar onChange={setSelectedDate} value={selectedDate} />
           </div>
         )}
         {/* Always render TaskBoard but pass filtered tasks based on activeTab and selectedDate for 'calendar' */}
         <TaskBoard tasks={filterTasks(activeTab)} setTasks={setTasks} userId={userId} fetchTasks={fetchTasks} handleDelete={handleDelete} handleEdit={handleEdit} />
+      </div>
+
+      <div className="tabs block sm:hidden">
+        {['today', 'all', 'overdue', 'calendar'].map((tab) => (
+          <button key={tab} className={activeTab === tab ? 'active' : ''} onClick={() => setActiveTab(tab)}>
+            {tab === 'today' && "Today's Task"}
+            {tab === 'all' && "All Tasks"}
+            {tab === 'overdue' && "Overdue Tasks"}
+            {tab === 'calendar' && <HiCalendar className='w-5 h-5'/>}
+          </button>
+        ))}
       </div>
     </div>
   );
