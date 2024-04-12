@@ -39,12 +39,12 @@ const Nav = () => {
 
         {session?.user ? (
           <Link href="/dashboard" className="flex gap-2 items-center">
-            <Image src="/assets/logo_tr.png" alt="DoEase logo" width={45} height={45} className="object-contain" />
+            <Image src="/assets/logo.svg" alt="Qued logo" width={55} height={55} className="object-contain" />
             <p className="logo_text ">Qued</p>
           </Link>
         ) : (
           <Link href="/" className="flex gap-2 items-center">
-            <Image src="/assets/logo_tr.png" alt="DoEase logo" width={45} height={45} className="object-contain" />
+            <Image src="/assets/logo.svg" alt="Qued logo" width={55} height={55} className="object-contain" />
             <p className="logo_text">Qued</p>
           </Link>
         )}

@@ -6,7 +6,7 @@ import Nav from '@/components/nav/Nav';
 
 
 export const metadata = {
-  title: "DoEase",
+  title: "Qued",
   description: "The next generation Task Management App.",
 };
 
@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel='icon' href='/assets/logo_tr.png' />
+        <link rel='icon' href='/assets/logo.svg' />
       </head>
       <body >
         <Provider>
