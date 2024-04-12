@@ -1,17 +1,5 @@
 const TaskCard = ({ task }) => {
   
-  const formattedDueDate = new Date(task.dueDate).toLocaleDateString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-  const formattedCreationDate = new Date(task.createdAt).toLocaleDateString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
   const formatDate = (date) => {
     if (!date) return '';
     const d = new Date(date);

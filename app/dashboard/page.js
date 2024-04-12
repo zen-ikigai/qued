@@ -5,6 +5,8 @@ import CreateTaskIcon from "@/components/task/CreateTask";
 import { useSession } from "next-auth/react";
 import TaskModal from "@/components/task/TaskModal";
 import Loading from "@/components/info/Loading";
+import withAuth from "@/components/hoc/withAuth";
+import Failure from "@/components/info/Failure";
 
 const Dashboard = () => {
     const { data: session, status, update } = useSession();
@@ -12,14 +14,21 @@ const Dashboard = () => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [currentTask, setCurrentTask] = useState(null);
     const [isEditing, setIsEditing] = useState(true);
+    const [failureModalFetchTasks, setFailureModalFetchTasks] = useState(false)
+    const [failureModalDeleteTask, setFailureModalDeleteTask] = useState(false)
+    const [failureModalChangeStatus, setFailureModalChangeStatus] = useState(false)
 
     
     const fetchTasks = async () => {
       const response = await fetch(`/api/user/${session?.user.id}/gettasks`, {
         method: 'GET'
       });
-      const data = await response.json()
-      setTasks(data);
+      if(response.ok){
+        const data = await response.json()
+        setTasks(data);
+      } else{
+        setFailureModalFetchTasks(true);        
+      }      
     };
 
     
@@ -46,13 +55,16 @@ const Dashboard = () => {
         });
     
         if (!response.ok) {
-          throw new Error('Failed to delete task');
+          setFailureModalDeleteTask(true);
+          update();
         }
         
       } catch (error) {
         console.error('Error deleting task:', error);
         // Revert the UI back to its previous state by adding the removed task back
         setTasks(prevTasks => [...prevTasks, removedTask]);
+        setFailureModalDeleteTask(true);
+        update();
       }
     };
     
@@ -77,7 +89,8 @@ const Dashboard = () => {
         });
 
         if (!response.ok) {
-          throw new Error('Failed to update task status');
+          setFailureModalChangeStatus(true);
+          update();
         }
       } catch (error) {
         console.error('Error updating task status:', error);
@@ -85,6 +98,8 @@ const Dashboard = () => {
         setTasks(prevTasks =>
           prevTasks.map(task => task._id === taskId ? { ...task, status: task.status } : task)
         );
+        setFailureModalChangeStatus(true);
+        update();
       }
     };
 
@@ -110,8 +125,29 @@ const Dashboard = () => {
           taskToEdit={currentTask}
 
           />}
+        {failureModalFetchTasks && (
+          <Failure
+            title="Failed"
+            message="Failed to fetch tasks."
+            onClose={() => setFailureModalFetchTasks(false)}
+          />
+        )}
+        {failureModalDeleteTask && (
+          <Failure
+            title="Failed"
+            message="Failed to delete task. Reverting Back!"
+            onClose={() => setFailureModalDeleteTask(false)}
+          />
+        )}
+        {failureModalChangeStatus && (
+          <Failure
+            title="Failed"
+            message="Failed to change Status. Reverting back!"
+            onClose={() => setFailureModalChangeStatus(false)}
+          />
+        )}
     </section>
   )
 }
 
-export default Dashboard
+export default withAuth(Dashboard);

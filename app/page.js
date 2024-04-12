@@ -2,8 +2,9 @@
 import TaskCard from "@/components/desktopTaskView/TaskCard";
 import TaskBoard from "@/components/desktopTaskView/TaskBoard";
 import { useState } from 'react'; // Ensure useState is imported
+import withoutAuth from "@/components/hoc/withoutAuth";
 
-export default function Home() {
+const Home = () => {
 
 
   const [tasks, setTasks] = useState([
@@ -84,4 +85,6 @@ export default function Home() {
       {/*<TaskBoard tasks={tasks} onStatusChange={handleStatusChange} /> */}
     </div>
   );
-}
+};
+
+export default withoutAuth(Home);

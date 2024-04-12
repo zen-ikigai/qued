@@ -5,7 +5,7 @@ import 'react-calendar/dist/Calendar.css';
 import { HiCalendar } from 'react-icons/hi';
 
 const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleEdit, handleStatusChange }) => {
-  const [activeTab, setActiveTab] = useState('today');
+  const [activeTab, setActiveTab] = useState('all');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [searchQuery, setSearchQuery] = useState('');  
   const [sortOrder, setSortOrder] = useState('creationDesc');
@@ -30,19 +30,19 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
     let filteredTasks = tasks;
 
     switch (tab) {
-      case 'today':
-        filteredTasks = filteredTasks.filter((task) => new Date(task.dueDate).toDateString() === now.toDateString());
-        break;
       case 'all':
         break; 
+      case 'today':
+        filteredTasks = filteredTasks.filter((task) => new Date(task.dueDate).toDateString() === now.toDateString());
+        break;      
       case 'overdue':
-        filteredTasks = filteredTasks.filter((task) => new Date(task.dueDate) < now);
+        filteredTasks = filteredTasks.filter((task) => new Date(task.dueDate) < now && task.status !== 'done');
         break;
       case 'calendar':
         filteredTasks = filteredTasks.filter((task) => new Date(task.dueDate).toDateString() === selectedDate.toDateString());
         break;
       default:
-        break; // No additional filtering
+        break; 
     }
 
     if (searchQuery) {
@@ -71,10 +71,10 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
   return (
     <div className='border border-black shadow-lg'>
       <div className="tabs ">
-        {['today', 'all', 'overdue', 'calendar'].map((tab) => (
+        {['all','today', 'overdue', 'calendar'].map((tab) => (
           <button key={tab} className={activeTab === tab ? 'active' : ''} onClick={() => setActiveTab(tab)}>
-            {tab === 'today' && "Today"}
             {tab === 'all' && "All"}
+            {tab === 'today' && "Today"}            
             {tab === 'overdue' && "Overdue"}
             {tab === 'calendar' && <HiCalendar className='w-5 h-5'/>}
           </button>
@@ -132,11 +132,11 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
         <TaskBoard tasks={filterTasks(activeTab)} setTasks={setTasks} userId={userId} fetchTasks={fetchTasks} handleDelete={handleDelete} handleEdit={handleEdit} handleStatusChange={handleStatusChange} />
       </div>
       <div className="tabs-bottom ">
-        {[ 'calendar', 'today', 'all', 'overdue'].map((tab) => (
+        {[ 'calendar', 'all', 'today', 'overdue'].map((tab) => (
           <button key={tab} className={activeTab === tab ? 'active' : ''} onClick={() => setActiveTab(tab)}>
             {tab === 'calendar' && <HiCalendar className='w-5 h-5'/>}
-            {tab === 'today' && "Today"}
             {tab === 'all' && "All"}
+            {tab === 'today' && "Today"}            
             {tab === 'overdue' && "Overdue"}
             
           </button>

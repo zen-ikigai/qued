@@ -35,10 +35,7 @@ const TaskBoard = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleEd
   ]);
   
   const [activeId, setActiveId] = useState(null);
-  const [draggedItem, setDraggedItem] = useState(null);
-
-  
-  
+  const [draggedItem, setDraggedItem] = useState(null); 
 
   useEffect(() => {
     setContainers(prevContainers => prevContainers.map(container => ({

@@ -39,8 +39,7 @@ const Profile = ({ tasks, setLoading }) => {
         setSuccessModalTasks(true);
         setLoading(false);
         update();
-      } else {
-        
+      } else {        
         setFailureModalTasks(true);
         setLoading(false);
     }
@@ -115,8 +114,20 @@ const Profile = ({ tasks, setLoading }) => {
             onClose={() => setDeleteAllTasks(false)}
             handleDelete={handleDeleteAllTasks}
           />
+        )}      
+       
+        <button className="delete-btn" onClick={() => setDeleteProfile(true)}>Delete Account</button>
+        {deleteProfile && (
+          <Delete 
+            title='Delete Profile'
+            message='Are you sure you want to Delete your Profile?'
+            onClose={() => setDeleteProfile(false)}
+            handleDelete={handleDeleteProfile}
+          />
         )}
-        {successModalTasks && (
+        
+      </div>
+      {successModalTasks && (
         <Success
           title="Done"
           message="All Tasks Deleted Successfully"
@@ -130,17 +141,6 @@ const Profile = ({ tasks, setLoading }) => {
             onClose={() => setFailureModalTasks(false)}
           />
         )}
-        
-       
-        <button className="delete-btn" onClick={() => setDeleteProfile(true)}>Delete Account</button>
-        {deleteProfile && (
-          <Delete 
-            title='Delete Profile'
-            message='Are you sure you want to Delete your Profile?'
-            onClose={() => setDeleteProfile(false)}
-            handleDelete={handleDeleteProfile}
-          />
-        )}
         {failureModalProfile && (
           <Failure
             title="Failed"
@@ -148,7 +148,6 @@ const Profile = ({ tasks, setLoading }) => {
             onClose={() => setFailureModalProfile(false)}
           />
       )}
-      </div>
       
     </div>
   );

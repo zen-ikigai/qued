@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import Failure from '../info/Failure';
 
 const formatDate = (date) => {
   if (!date) return '';
@@ -16,6 +17,7 @@ const formatDate = (date) => {
 
 const TaskModal = ({ fetchTasks, handleModal, apiEndpoint, buttonName, heading, isEditing, taskToEdit }) => {
   const { data: session, status, update } = useSession();
+  const [failureModalCreateTask, setFailureModalCreateTask] = useState(false)
 
   const [task, setTask] = useState(() => {
     if (isEditing) {
@@ -62,23 +64,27 @@ const TaskModal = ({ fetchTasks, handleModal, apiEndpoint, buttonName, heading, 
           body: JSON.stringify(task),
         });
 
-        if (!response.ok) {
-            throw new Error('Failed to process task');
+        if (response.ok) {
+          const newTask = await response.json();
+        
+
+          handleModal();
+          update();
+          fetchTasks(); 
+          const today = formatDate(new Date());
+          setTask({
+            title: '',
+            description: '',
+            status: 'todo',
+            dueDate: today,
+            reminder: false,
+          });
+        } else {
+            setFailureModalCreateTask(true);
+            update();
         }
 
-        const newTask = await response.json();
-        console.log('Task processed successfully');
-
-        handleModal();
-        update();
-        fetchTasks(); // Refresh tasks to reflect changes
-        setTask({
-          title: '',
-          description: '',
-          status: 'todo',
-          dueDate: new Date().toISOString().slice(0, 16),
-          reminder: false,
-        });
+        
     } catch (error) {
         console.error('Error processing task:', error);
     }
@@ -113,7 +119,7 @@ const TaskModal = ({ fetchTasks, handleModal, apiEndpoint, buttonName, heading, 
          
 
           <div className='items-center justify-center mt-5'>
-            <input type="checkbox" name="reminder" checked={task.reminder} onChange={handleChange} className='mr-2' />
+            <input type="checkbox" name="reminder" checked={task.reminder} onChange={handleChange} className='mr-2' disabled />
             <label>Set Reminder</label>            
           </div>
 
@@ -123,6 +129,13 @@ const TaskModal = ({ fetchTasks, handleModal, apiEndpoint, buttonName, heading, 
           </div>
         </form>
       </div>
+      {failureModalCreateTask && (
+          <Failure
+            title="Failed"
+            message="Failed to create/edit Task."
+            onClose={() => setFailureModalCreateTask(false)}
+          />
+        )}
     </div>
   );
 };

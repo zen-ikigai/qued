@@ -9,9 +9,7 @@ const CreateTaskIcon = ({ fetchTasks }) => {
   const [isEditing, setIsEditing] = useState(false);
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
-  };
-
-  
+  };  
 
   return (
     <div>
