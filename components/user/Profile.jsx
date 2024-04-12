@@ -81,7 +81,7 @@ const Profile = ({ tasks, setLoading }) => {
 
   return (
     <div className="profile-container bg-purple-100 shadow-2xl border border-black  min-w-[80vw] font-mono">
-      <div className="flex items-center gap-4 ">
+      <div className="flex flex-col sm:flex-row items-center gap-4 ">
         <img src={`data:image/png;base64,${session?.user?.image}`} alt="Profile" className="profile-image" />
         <div>
           <h1 className="text-2xl">{session?.user.username}</h1>
