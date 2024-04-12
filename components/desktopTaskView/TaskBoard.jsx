@@ -156,7 +156,7 @@ const findContainerById = (containerId) => {
       </div>
       <DragOverlay>
         {draggedItem && (
-          <SortableTask task={draggedItem} isDragging /> 
+          <SortableTask task={draggedItem}  /> 
         )}
       </DragOverlay>
     </DndContext>

@@ -33,11 +33,12 @@ export function SortableTask({ id, task, handleDelete, userId, handleEdit, handl
     transform: CSS.Transform.toString(transform),
     transition,
     cursor: isDragging ? 'moving' : 'move',
+    opacity: isDragging ? 0 : 1
   };
 
   return (
-   <div className='border border-black'>
-     <div ref={setNodeRef} style={style} {...attributes} {...listeners} className='hidden sm:block' >
+   <div className='border border-black' style={style}>
+     <div ref={setNodeRef}  {...attributes} {...listeners} className='hidden sm:block' >
       <TaskCard task={task}  />      
      </div>
      <div  className='block sm:hidden'>
