@@ -95,21 +95,22 @@ const TaskModal = ({ fetchTasks, handleModal, apiEndpoint, buttonName, heading, 
           <label>Description</label>
           <textarea name="description" value={task.description} onChange={handleChange} required />
 
-          <div className='flex items-center justify-between mt-5'>
-            <div>
+          
+            <label className='mr-2'>Due Date</label>
+            <input type="datetime-local" name="dueDate" value={task.dueDate} onChange={handleChange} required className='p-2'/>
+          
+
+            
               <label className='mr-2'>Status</label>
               <select name="status" value={task.status} onChange={handleChange} required>
                 <option value="todo">To Do</option>
                 <option value="inProgress">In Progress</option>
                 <option value="done">Done</option>
               </select>
-            </div>
-
-            <div>
-              <label className='mr-2'>Due Date and Time</label>
-              <input type="datetime-local" name="dueDate" value={task.dueDate} onChange={handleChange} required/>
-            </div>
-          </div>
+      
+          
+          
+         
 
           <div className='items-center justify-center mt-5'>
             <input type="checkbox" name="reminder" checked={task.reminder} onChange={handleChange} className='mr-2' />
