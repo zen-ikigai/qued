@@ -35,17 +35,17 @@ const Nav = () => {
   
 
   return (
-    <nav className="flex-between w-full mb-16 pt-3 mt-2 font-mono">   
+    <nav className="flex-between w-full mb-16 pt-3 mt-2 font-mono ">   
 
         {session?.user ? (
           <Link href="/dashboard" className="flex gap-2 items-center">
             <Image src="/assets/logo_tr.png" alt="DoEase logo" width={45} height={45} className="object-contain" />
-            <p className="logo_text">DoEase</p>
+            <p className="logo_text ">Qued</p>
           </Link>
         ) : (
           <Link href="/" className="flex gap-2 items-center">
             <Image src="/assets/logo_tr.png" alt="DoEase logo" width={45} height={45} className="object-contain" />
-            <p className="logo_text">DoEase</p>
+            <p className="logo_text">Qued</p>
           </Link>
         )}
       
@@ -72,15 +72,8 @@ const Nav = () => {
         ) : (
           <>          
             <div className="flex gap-3 md:gap-5">
-            <Link href="/" className={`${pathname == "/" ? "tab_btn active" : "tab_btn"}`}>
-              Home
-            </Link>
-            <Link href="/features" className={`${pathname == "/features" ? "tab_btn active" : "tab_btn"}`}>
-              Features
-            </Link>
-            <Link href="https://trustmary.com/form/XSbQZg7_0" className="outline_btn_mono" target="_blank">
-              Feedback
-            </Link>            
+           
+                      
             {providers &&
               Object.values(providers).map((provider) => (
                 <button
@@ -89,7 +82,7 @@ const Nav = () => {
                   onClick={() => handleSignin(provider.id)}
                   className="black_btn_mono"
                 >
-                  Join Now <HiArrowRight className='ml-2'/> 
+                  Get Started <HiArrowRight className='ml-2'/> 
                 </button>
               ))}
             </div>
@@ -145,17 +138,7 @@ const Nav = () => {
             </div>
           )
           : (
-            <div className="flex justify-evenly py-3">
-              <Link href="/" >
-                <HiHome size={24} className={`hover:text-white flex items-center ${pathname == "/" ? "text-white" : "text-gray-700"}`}/>
-              </Link>
-              <Link href="/features" >
-                <HiCheckCircle size={24} className={`hover:text-white flex items-center ${pathname == "/features" ? "text-white" : "text-gray-700"}`}/>
-              </Link>
-              <button type="button" onClick={handleScrollToTop} className="text-gray-700 hover:text-white flex items-center"> 
-                <HiArrowSmUp size={24} />
-              </button>
-            </div>
+            <></>
           )
           }
         </div>

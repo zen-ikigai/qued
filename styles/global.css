@@ -212,18 +212,18 @@ Scrollbar customisation inspire from dev.to
 }
 
 .black_btn {
-  @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
+  @apply rounded-full border border-black bg-black py-1.5 px-5 text-gray-200 transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
 }
 .black_btn_mono {
-  @apply rounded border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-mono flex items-center justify-center;
+  @apply rounded border border-black bg-black py-2.5 px-5 text-gray-200 transition-all hover:bg-white hover:text-black text-center text-sm font-mono flex items-center justify-center;
 }
 
 .outline_btn {
-  @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
+  @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-gray-800 transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
 }
 
 .outline_btn_mono {
-  @apply rounded border border-black bg-blue-50 py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-mono flex items-center justify-center;
+  @apply rounded border border-black bg-blue-50 py-2.5 px-5 text-gray-800 transition-all hover:bg-black hover:text-white text-center text-sm font-mono flex items-center justify-center;
 
 }
 
@@ -272,6 +272,10 @@ Scrollbar customisation inspire from dev.to
 .blue_gradient {
   @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
 }
+.pastel_gradient {
+  @apply bg-gradient-to-r from-red-300 via-yellow-300 to-green-300 bg-clip-text text-transparent;
+}
+
 
 .desc {
   @apply mt-5 text-lg text-gray-600 sm:text-xl max-w-2xl;
@@ -339,7 +343,7 @@ Scrollbar customisation inspire from dev.to
 
 /* Nav Component */
 .logo_text {
-  @apply  font-mono font-semibold text-lg text-black tracking-wide;
+  @apply  font-mono font-semibold text-lg text-gray-800 tracking-wide;
 }
 
 .dropdown {
@@ -693,8 +697,8 @@ body {
   max-width: 600px;
   margin: 20px auto;
   padding: 20px;
-  background: #f9f9fa;
-  border-radius: 10px;
+  
+ 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -718,7 +722,7 @@ body {
   justify-content: space-around;
   margin: 20px 0;
   padding-top: 20px;
-  border-top: 1px solid #e1e1e2;
+  border-top: 1px solid gray;
 }
 
 .stat-item {
@@ -739,7 +743,7 @@ body {
 .profile-actions {
   text-align: center;
   padding-top: 20px;
-  border-top: 1px solid #e1e1e2;
+  border-top: 1px solid gray;
 }
 
 .delete-btn {
@@ -801,6 +805,17 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.feature-card {
+  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: rotate(0); /* Rotates back to 0 degrees on hover */
 }
 
 

@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       </head>
       <body >
         <Provider>
-          <div className='app'>
+          <div className='app min-h-screen'>
             <Nav/>
             <main className='flex-grow'> 
               {children}

@@ -1,90 +1,73 @@
-'use client'
-import TaskCard from "@/components/desktopTaskView/TaskCard";
-import TaskBoard from "@/components/desktopTaskView/TaskBoard";
-import { useState } from 'react'; // Ensure useState is imported
+"use client";
+
+
 import withoutAuth from "@/components/hoc/withoutAuth";
 
-const Home = () => {
+import { handleSignIn } from '@/components/auth/Login';
+import { HiArrowRight, HiGlobeAlt, HiOutlineGlobeAlt, HiOutlinePencil, HiPencil, HiPencilAlt } from 'react-icons/hi';
+import FeatureCard from "@/components/info/FeatureCard";
 
-
-  const [tasks, setTasks] = useState([
+const Home = () => {   
+  const features = [
     {
-    id: '1',
-    title: 'Design the TaskCard component',
-    description: 'Create a reusable TaskCard component for displaying individual tasks.',
-    dueDate: new Date().toISOString(), // Use the current date for simplicity
-    status: 'inProgress', // Assume this task is currently in progress
-  },
-
-  {
-    id: '2',
-    title: 'Design the TaskCard component',
-    description: 'Create a reusable TaskCard component for displaying individual tasks.',
-    dueDate: new Date().toISOString(), // Use the current date for simplicity
-    status: 'done', // Assume this task is currently in progress
-  },
-
-  {
-    id: '3',
-    title: 'Design the TaskCard component',
-    description: 'Create a reusable TaskCard component for displaying individual tasks.',
-    dueDate: new Date().toISOString(), // Use the current date for simplicity
-    status: 'todo', // Assume this task is currently in progress
-  },
-  {
-    id: '4',
-    title: 'Design the TaskCard component',
-    description: 'Create a reusable TaskCard component for displaying individual tasks.',
-    dueDate: new Date().toISOString(), // Use the current date for simplicity
-    status: 'done', // Assume this task is currently in progress
-  },
-  
-
-
-]);
-  const handleUpdateStatus = (taskId, newStatus) => {
-    console.log(`Task ${taskId} status updated to ${newStatus}. Implement this functionality.`);
-  };
-  
-  const handleEditTask = (task) => {
-    console.log(`Editing task ${task.id}. Implement this functionality.`);
-  };
-  const handleStatusChange = async (taskId, newStatus) => {
-    // Optimistically update the task status in the local state
-    const updatedTasks = tasks.map((task) =>
-      task.id === taskId ? { ...task, status: newStatus } : task
-    );
-    setTasks(updatedTasks);
-
-    try {
-      // Send the status update to the backend
-      const response = await updateTaskStatus(taskId, newStatus); // Implement this function to update the task in your backend
-      if (!response.ok) {
-        throw new Error('Failed to update task status');
-      }
-
-      // If necessary, update the task in state based on the response
-      // For example, if the backend sends back the updated task, you might want to update it in your local state
-    } catch (error) {
-      console.error(error);
-
-      // In case of an error, revert to the previous state
-      setTasks(tasks);
-      alert('Could not update the task status. Please try again.');
-    }
-  };
-  
+      title: "Easy Google Login",
+      description: "No need to remember another password. Just login with your Google account and you're good to go.",
+      status: "existing",
+    },
+    {
+      title: "Inutive UI",
+      description: "The UI is designed to be simple and intuitive. You can get started in a few clicks.",
+      status: "existing",
+    },
+    {
+      title: "Drag and Drop",
+      description: "You can easily update the status of tasks by dragging nad dropping",
+      status: "existing",
+    },
+    {
+      title: "Custom Unique Avatars",
+      description: "Every user gets an avatar from the HueMan API. No need to upload a profile picture.",
+      status: "existing",
+    },
+    {
+      title: "Profile Page",
+      description: "A profile page for every user with analytics, 1-Click easy Deletion of Tasks and Profile.",
+      status: "existing",
+    },
+    {
+      title: "Search, Sort, Filter",
+      description: "Search through all the tasks, Filter them based on status and date, sort them based on due date and creation date. ",
+      status: "existing",
+    },
+    
+    
+    
+    
+  ];
   return (
-    <div className="flex h-screen">
-     
-       {/*<TaskCard
-        task={dummyTask}
-        onUpdateStatus={handleUpdateStatus}
-        onEdit={handleEditTask}
-      />*/}
-      {/*<TaskBoard tasks={tasks} onStatusChange={handleStatusChange} /> */}
-    </div>
-  );
-};
+    
+      <section className="w-full flex-center flex-col flex-grow">
+        <h1 className="head_text pastel_gradient text-center font-mono">
+        Effortless Organization
+        </h1>
+        <h2 className='font-semibold  text-xl md:text-2xl mt-5 text-center font-mono text-gray-600'>
+        Master Your Tasks, Own Your Time
+        </h2>
+
+        <p className="desc text-justify font-mono text-gray-600">
+        Welcome to Qued, where simplicity meets productivity. Join the community of achievers, Embrace efficiency and Transform your productivity with Qued.
+        </p>
+        <div className='flex justify-between items-center gap-5 mt-10 '>
+        <button onClick={handleSignIn} className='outline_btn_mono '>Start Exploring <HiArrowRight className='ml-2'/> </button>
+        <button onClick={handleSignIn} className='black_btn_mono '>Organize Now <HiArrowRight className='ml-2'/> </button>
+        </div>      
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-10">
+        {features.map((feature, index) => (
+            <FeatureCard key={index} index={index} feature={feature} />
+          ))}
+        </div>
+      </section> 
+  )
+}
 
 export default withoutAuth(Home);
