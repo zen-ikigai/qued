@@ -37,7 +37,7 @@ export function SortableTask({ id, task, handleDelete, userId, handleEdit, handl
   };
 
   return (
-   <div className='border border-black' style={style}>
+   <div className='border border-black shadow-lg font-mono' style={style}>
      <div ref={setNodeRef}  {...attributes} {...listeners} className='hidden sm:block' >
       <TaskCard task={task}  />      
      </div>
@@ -45,7 +45,7 @@ export function SortableTask({ id, task, handleDelete, userId, handleEdit, handl
       <TaskCard task={task}  />      
      </div>
     <div className="flex justify-between items-center mb-2 pl-4 pr-4">
-        <div className="flex space-x-2 mt-4">
+        <div className="flex space-x-2 mt-2">
           <button onClick={() => handleEdit(task)} className="icon_btn">
             <HiOutlinePencil className="h-4 w-4" />
           </button>
@@ -53,7 +53,7 @@ export function SortableTask({ id, task, handleDelete, userId, handleEdit, handl
             <HiOutlineTrash className="h-4 w-4" />
           </button>
         </div>
-        <div className="flex justify-end mt-4">
+        <div className="flex justify-end mt-2">
           <select
             value={task.status}
             onChange={(e) => handleStatusChange(task._id, e.target.value)}

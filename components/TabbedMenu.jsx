@@ -8,6 +8,7 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
   const [activeTab, setActiveTab] = useState('today');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [searchQuery, setSearchQuery] = useState('');  
+  const [sortOrder, setSortOrder] = useState('creationDesc');
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
@@ -15,6 +16,10 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
 
   const handlClearSearch = () => {
     setSearchQuery('');
+  };
+
+  const handleSortChange = (e) => {
+    setSortOrder(e.target.value);
   };
 
   // Helper function to filter tasks based on the tab and search query
@@ -48,12 +53,24 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
       );
     }
 
+    filteredTasks = [...filteredTasks].sort((a, b) => {
+      switch (sortOrder) {
+        case 'creationDesc': return new Date(b.createdAt) - new Date(a.createdAt);
+        case 'creationAsc': return new Date(a.createdAt) - new Date(b.createdAt);
+        case 'dueDesc': return new Date(b.dueDate) - new Date(a.dueDate);
+        case 'dueAsc': return new Date(a.dueDate) - new Date(b.dueDate);
+        default: return 0;
+      }
+    });
+
+
+
     return filteredTasks;
   };
 
   return (
-    <div className='border border-black'>
-      <div className="tabs">
+    <div className='border border-black shadow-lg'>
+      <div className="tabs ">
         {['today', 'all', 'overdue', 'calendar'].map((tab) => (
           <button key={tab} className={activeTab === tab ? 'active' : ''} onClick={() => setActiveTab(tab)}>
             {tab === 'today' && "Today"}
@@ -65,8 +82,8 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
       </div>
 
       {/* Search Bar */}
-      <div className='flex items-center justify-center'>
-        <form className="relative w-11/12  mt-5  items-center justify-center">
+      <div className='flex sm:flex-row flex-col gap-5 items-center justify-center mt-7'>
+        <form className="relative sm:w-3/4 items-center justify-center">
           <input
             type="text"
             value={searchQuery}
@@ -96,16 +113,34 @@ const TabbedMenu = ({ tasks, setTasks, userId, fetchTasks, handleDelete, handleE
               </svg>
             </button>
           )}
+          
         </form>
+        <select onChange={handleSortChange} className="w-1/6 sort_input">
+          <option value="creationDesc">Sort: Newest First</option>
+          <option value="creationAsc">Sort: Oldest First</option>
+          <option value="dueDesc">Sort: Due Date (Desc)</option>
+          <option value="dueAsc">Sort: Due Date (Asc)</option>
+        </select>        
       </div>
 
-      <div className="tab-content">
+      <div className="tab-content mt-2">
         {activeTab === 'calendar' && (
           <div className='mb-5 flex items-center justify-center'>
             <Calendar onChange={setSelectedDate} value={selectedDate} />
           </div>
         )}
         <TaskBoard tasks={filterTasks(activeTab)} setTasks={setTasks} userId={userId} fetchTasks={fetchTasks} handleDelete={handleDelete} handleEdit={handleEdit} handleStatusChange={handleStatusChange} />
+      </div>
+      <div className="tabs-bottom ">
+        {[ 'calendar', 'today', 'all', 'overdue'].map((tab) => (
+          <button key={tab} className={activeTab === tab ? 'active' : ''} onClick={() => setActiveTab(tab)}>
+            {tab === 'calendar' && <HiCalendar className='w-5 h-5'/>}
+            {tab === 'today' && "Today"}
+            {tab === 'all' && "All"}
+            {tab === 'overdue' && "Overdue"}
+            
+          </button>
+        ))}
       </div>
     </div>
   );

@@ -2,16 +2,23 @@
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 
+const formatDate = (date) => {
+  if (!date) return '';
+  const d = new Date(date);
+  return d.toISOString().split('T')[0]; 
+};
+
 const TaskModal = ({ fetchTasks, handleModal, apiEndpoint, buttonName, heading, isEditing, taskToEdit }) => {
   const { data:session, status, update } = useSession();
 
   const [task, setTask] = useState(() => {
+    const today = new Date().toISOString().split('T')[0]; 
     if(isEditing) {
       return {
         title: taskToEdit.title,
         description: taskToEdit.description,
         status: taskToEdit.status,
-        dueDate: taskToEdit.dueDate, 
+        dueDate: formatDate(taskToEdit.dueDate), 
         reminder: taskToEdit.reminder || false,
       } 
   }
@@ -20,7 +27,7 @@ const TaskModal = ({ fetchTasks, handleModal, apiEndpoint, buttonName, heading, 
       title: '',
       description: '',
       status: 'todo',
-      dueDate: '',
+      dueDate: today,
       reminder: false,
     } 
   }  
@@ -38,6 +45,11 @@ const handleChange = (e) => {
   const handleSubmit = async (e) => {
     e.preventDefault();   
 
+    if (!task.title || !task.description || !task.status) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+    // We can do optimistic updates here as well.
     try {
         if (isEditing) {
           const response = await fetch(apiEndpoint, {
@@ -49,11 +61,11 @@ const handleChange = (e) => {
           });
 
           if (!response.ok) {
-              throw new Error('Failed to create task');
+              throw new Error('Failed to edit task');
           }
 
           const newTask = await response.json();
-          console.log('Task created successfully');
+          console.log('Task edited successfully');
         }
         else {
           const response = await fetch(apiEndpoint, {
@@ -97,7 +109,7 @@ const handleChange = (e) => {
 
   return (
     <div className="modal-backdrop font-mono ">
-      <div className="modal bg-blue-100 border border-black">
+      <div className="modal bg-blue-100 border border-black shadow-2xl">
         <h2 className='text-3xl font-bold text-center'>{heading}</h2>
         <form onSubmit={handleSubmit} >
           <label>Title</label>

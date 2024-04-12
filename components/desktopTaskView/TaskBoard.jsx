@@ -143,7 +143,7 @@ const findContainerById = (containerId) => {
     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <div className='flex gap-4 sm:flex-row flex-col sm:min-h-[70vh] min-h-[60vh] font-mono'>
         {containers.map((container) => (
-          <div key={container.id} className={`w-full p-4 min-h-[20vh] flex flex-col gap-4 ${container.bgColor}`}>
+          <div key={container.id} className={`w-full p-4 min-h-[20vh] flex flex-col gap-4 shadow-2xl ${container.bgColor}`}>
             <h2 className={`font-bold text-lg text-center ${container.titleColor} p-2`}>{container.name}</h2>
             <SortableContext items={container.tasks.map((task) => task._id)} strategy={verticalListSortingStrategy}>
               {container.tasks.map((task) => (

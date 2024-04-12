@@ -290,6 +290,14 @@ Scrollbar customisation inspire from dev.to
     min-width: 80vw;
   }
 }
+.sort_input {
+  @apply block border border-gray-800  bg-white py-2.5 font-mono pl-3 pr-3 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
+
+  @media screen and (max-width: 640px) {
+    width: 80%;
+    min-width: 80vw;
+  }
+}
 
 .copy_btn {
   @apply w-7 h-7 rounded-full bg-white/10 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex justify-center items-center cursor-pointer;
@@ -560,9 +568,8 @@ body {
 .tabs-bottom {
   display: flex;
   justify-content: space-around;
-  border-bottom: 1px solid ;
-  border-left: 1px solid ;
-  border-right: 1px solid ;
+  border-top: 1px solid ;
+ 
 }
 
 /* Style for each tab button */
