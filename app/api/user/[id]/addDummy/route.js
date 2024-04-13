@@ -3,32 +3,31 @@ import { Task } from '@/models/task'
 import { User } from '@/models/user'
 
 const createDummyTasks = () => {
-    const baseDate = new Date();
-    return [
-      ...Array.from({ length: 3 }).map((_, i) => ({
-        title: `Task ${i + 1}`,
-        description: "Lorem Ipsum Dolor",
-        status: "todo",
-        dueDate: new Date(baseDate.getTime() + ((i - 1) * 2 * 86400000)), // -2, 0, +2 days
-        reminder: false,
-      })),
-      ...Array.from({ length: 3 }).map((_, i) => ({
-        title: `Task ${i + 4}`,
-        description: "Lorem Ipsum",
-        status: "inProgress",
-        dueDate: new Date(baseDate.getTime() + ((i - 1) * 2 * 86400000)), // -2, 0, +2 days
-        reminder: false,
-      })),
-      ...Array.from({ length: 3 }).map((_, i) => ({
-        title: `Task ${i + 7}`,
-        description: "Lorem Ipsum",
-        status: "done",
-        dueDate: new Date(baseDate.getTime() + ((i - 1) * 2 * 86400000)), // -2, 0, +2 days
-        reminder: false,
-      })),
-    ];
-  };
-  
+  const baseDate = new Date()
+  return [
+    ...Array.from({ length: 3 }).map((_, i) => ({
+      title: `Task ${i + 1}`,
+      description: 'Lorem Ipsum Dolor',
+      status: 'todo',
+      dueDate: new Date(baseDate.getTime() + (i - 1) * 2 * 86400000), // -2, 0, +2 days
+      reminder: false,
+    })),
+    ...Array.from({ length: 3 }).map((_, i) => ({
+      title: `Task ${i + 4}`,
+      description: 'Lorem Ipsum',
+      status: 'inProgress',
+      dueDate: new Date(baseDate.getTime() + (i - 1) * 2 * 86400000), // -2, 0, +2 days
+      reminder: false,
+    })),
+    ...Array.from({ length: 3 }).map((_, i) => ({
+      title: `Task ${i + 7}`,
+      description: 'Lorem Ipsum',
+      status: 'done',
+      dueDate: new Date(baseDate.getTime() + (i - 1) * 2 * 86400000), // -2, 0, +2 days
+      reminder: false,
+    })),
+  ]
+}
 
 /**
  * Handles the POST request to add 6 new dummy tasks for a specified user.
@@ -60,13 +59,13 @@ export const POST = async (req, { params }) => {
       })
     }
 
-    const dummyTasks = createDummyTasks();
+    const dummyTasks = createDummyTasks()
     const tasks = await Task.insertMany(
-        dummyTasks.map(task => ({ ...task, creator: user._id }))
-      );
-    
-    user.tasks.push(...tasks.map(task => task._id));
-    await user.save();   
+      dummyTasks.map(task => ({ ...task, creator: user._id })),
+    )
+
+    user.tasks.push(...tasks.map(task => task._id))
+    await user.save()
 
     // Respond with the newly created task
     return new Response('Added Dummy Data Successfully', {

@@ -35,7 +35,6 @@ const TabbedMenu = ({
   const [searchQuery, setSearchQuery] = useState('')
   const [sortOrder, setSortOrder] = useState('creationDesc')
   const [failureModalAddDummy, setFailureModalAddDummy] = useState(false)
-  
 
   const handleSearchChange = e => {
     setSearchQuery(e.target.value)
@@ -54,19 +53,19 @@ const TabbedMenu = ({
     try {
       const response = await fetch(`/api/user/${userId}/addDummy`, {
         method: 'POST',
-      });
+      })
       if (response.ok) {
-        await fetchTasks(); // Refresh the list after adding
+        await fetchTasks() // Refresh the list after adding
       } else {
         setFailureModalCreateTask(true)
         update()
       }
-      setLoading(false);
+      setLoading(false)
     } catch (error) {
-      console.error('Failed to add dummy data:', error);
+      console.error('Failed to add dummy data:', error)
       setLoading(false)
     }
-  };
+  }
 
   // Helper function to filter tasks based on the tab, search query and sort order
   const filterTasks = tab => {
@@ -175,7 +174,10 @@ const TabbedMenu = ({
             </button>
           )}
         </form>
-        <select onChange={handleSortChange} className='w-1/6 sort_input rounded'>
+        <select
+          onChange={handleSortChange}
+          className='w-1/6 sort_input rounded'
+        >
           <option value='creationDesc'>Sort: Newest First</option>
           <option value='creationAsc'>Sort: Oldest First</option>
           <option value='dueDesc'>Sort: Due Date (Desc)</option>
@@ -194,7 +196,11 @@ const TabbedMenu = ({
       <div className='tab-content mt-2'>
         {activeTab === 'calendar' && (
           <div className='mb-5 flex items-center justify-center '>
-            <Calendar onChange={setSelectedDate} value={selectedDate} className='rounded' />
+            <Calendar
+              onChange={setSelectedDate}
+              value={selectedDate}
+              className='rounded'
+            />
           </div>
         )}
         <TaskBoard

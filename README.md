@@ -1,4 +1,5 @@
 ##
+
 <p align="center">
   <img src="https://socialify.git.ci/zen-ikigai/qued/image?description=1&amp;descriptionEditable=Effortless%20Organization%0AMaster%20Your%20Tasks%2C%20Own%20Your%20Time&amp;font=Source%20Code%20Pro&amp;language=1&amp;name=1&amp;pattern=Plus&amp;theme=Dark" alt="project-image">
 </p>
@@ -8,7 +9,6 @@
 Qued is a robust task management platform designed to simplify how you organize and track your daily tasks. Leveraging a clean and intuitive interface, Qued makes it effortless to manage tasks, enhancing productivity every day.
 
 ## Features
-
 
 - **Google Single Sign-On**: Effortlessly sign in with your Google account.
 - **Dynamic Task Management**: Create, edit, and delete tasks with a few clicks.
@@ -33,6 +33,7 @@ Qued is a robust task management platform designed to simplify how you organize 
 ### Prerequisites
 
 Before you begin, ensure you have the following installed:
+
 - Node.js (>= 12.x)
 - npm/yarn
 - MongoDB
@@ -40,29 +41,31 @@ Before you begin, ensure you have the following installed:
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/yourusername/qued.git
    cd qued
    ```
 
 2. Install the dependencies:
+
    ```bash
    npm install
    ```
 
 3. Set up your environment variables:
+
    ```plaintext
    Rename .env.example to .env and update the values accordingly.
    ```
 
 4. Run the development server:
+
    ```bash
    npm run dev
    ```
 
 5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-
 
 ## Testing and Security
 

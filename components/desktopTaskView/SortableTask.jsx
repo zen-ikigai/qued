@@ -66,7 +66,10 @@ export function SortableTask({
   }
 
   return (
-    <div className='border border-black shadow-lg font-mono rounded' style={style}>
+    <div
+      className='border border-black shadow-lg font-mono rounded'
+      style={style}
+    >
       <div
         ref={setNodeRef}
         {...attributes}
