@@ -30,6 +30,7 @@ Visit the demo here: [Qued](https://qued-pesto.vercel.app/)
 - **Deployment**: Vercel
 - **Formatting**: Prettier
 - **Testing**: Postman, Lighthouse
+- **Analytics**: Vercel Analytics
 
 ## Getting Started
 
