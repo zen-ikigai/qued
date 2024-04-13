@@ -54,6 +54,10 @@ const Dashboard = () => {
     }
   }, [session])
 
+  if (status === 'loading' || !session) {
+    return <Loading />
+  }
+
   /**
    * Handles deletion of a task. Updates the task list optimistically and reverts if the deletion fails.
    * @param {string} taskId - ID of the task to delete.

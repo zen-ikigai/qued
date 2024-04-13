@@ -81,7 +81,7 @@ const Home = () => {
       </div>
       <div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-10'>
         {features.map((feature, index) => (
-          <FeatureCard key={index} feature={feature} />
+          <FeatureCard key={index} index={index} feature={feature} />
         ))}
       </div>
     </section>
