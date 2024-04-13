@@ -8,6 +8,7 @@
 
 Qued is a robust task management platform designed to simplify how you organize and track your daily tasks. Leveraging a clean and intuitive interface, Qued makes it effortless to manage tasks, enhancing productivity every day.
 
+Visit the demo here: [Qued](https://qued-pesto.vercel.app/)
 ## Features
 
 - **Google Single Sign-On**: Effortlessly sign in with your Google account.
@@ -27,6 +28,8 @@ Qued is a robust task management platform designed to simplify how you organize 
 - **Authentication**: NextAuth.js with Google Provider
 - **Styling**: Tailwind CSS, Sass
 - **Deployment**: Vercel
+- **Formatting**: Prettier
+- **Testing**: Postman, Lighthouse
 
 ## Getting Started
 
