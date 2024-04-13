@@ -1,16 +1,23 @@
+##
+<p align="center">
+  <img src="https://socialify.git.ci/zen-ikigai/qued/image?description=1&amp;descriptionEditable=Effortless%20Organization%0AMaster%20Your%20Tasks%2C%20Own%20Your%20Time&amp;font=Source%20Code%20Pro&amp;language=1&amp;name=1&amp;pattern=Plus&amp;theme=Dark" alt="project-image">
+</p>
+
 # Qued - Task Management Simplified
 
-Qued is a robust task management platform designed to simplify the way you organize and track your daily tasks. Leveraging a clean and intuitive interface, Qued makes it effortless to manage tasks, from creation to completion, enhancing your productivity every day.
+Qued is a robust task management platform designed to simplify how you organize and track your daily tasks. Leveraging a clean and intuitive interface, Qued makes it effortless to manage tasks, enhancing productivity every day.
 
 ## Features
+
 
 - **Google Single Sign-On**: Effortlessly sign in with your Google account.
 - **Dynamic Task Management**: Create, edit, and delete tasks with a few clicks.
 - **Drag and Drop**: Easily update the status of tasks using a drag-and-drop interface.
 - **Responsive Task Filtering**: Filter tasks by status, due dates, or custom search queries.
-- **Advanced Sorting**: Sort tasks by creation date, due date, and more.
-- **Calendar Integration**: View and manage tasks directly from a calendar view.
-- **Automated Reminders**: Set up reminders for your tasks to ensure you never miss a deadline.
+- **Advanced Sorting**: Sort tasks by creation date, and due date.
+- **Personalised Profile**: Profile with analytics, 1-Click tasks and profile delete.
+- **Responsive UI**: A mobile first interface ideal for both mobile and desktop users alike.
+- **Custom Unique Avatars**: Every user gets a unique avatar from the [HueMan API.](https://hueman.space)
 
 ## Technology Stack
 
@@ -18,7 +25,7 @@ Qued is a robust task management platform designed to simplify the way you organ
 - **Backend**: Next.js API Routes
 - **Database**: MongoDB with Mongoose
 - **Authentication**: NextAuth.js with Google Provider
-- **Styling**: Tailwind CSS
+- **Styling**: Tailwind CSS, Sass
 - **Deployment**: Vercel
 
 ## Getting Started
@@ -55,16 +62,18 @@ Before you begin, ensure you have the following installed:
 
 5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Usage
 
-Navigate through the app using the sidebar to access different functionalities:
-- **Dashboard**: View and manage all your tasks.
-- **Calendar**: Manage tasks directly from the calendar.
-- **Profile**: View and edit your profile, including settings.
+
+## Testing and Security
+
+- **API Testing**: Extensively tested with Postman to ensure API reliability and performance.
+- **Responsive Testing**: Utilized browser developer tools to ensure a seamless user experience on various devices.
+- **Performance and Accessibility**: Enhanced with Lighthouse to optimize performance, accessibility, SEO, and best practices.
+- **Security Measures**: Implemented HOC and basic security practices, including secure HTTP headers, authenticated flows and data validation to protect against common vulnerabilities.
 
 ## Contributing
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are welcome! Here’s how you can contribute:
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -72,10 +81,8 @@ Contributions are what make the open-source community such an amazing place to l
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## License
+## Future Enhancements
 
-Distributed under the MIT License. See `LICENSE` for more information.
-
+- **Notifications**: Integration with Amazon SES for task reminders and notifications is in progress. Exploring the use of a Node.js server with cron job capabilities for scheduled notifications. Exploring different modes of notifications like SMS, Push Notifications etc.
 
 ```
-
