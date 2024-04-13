@@ -213,10 +213,10 @@ const TaskBoard = ({
         {containers.map(container => (
           <div
             key={container.id}
-            className={`w-full p-4 min-h-[20vh] flex flex-col gap-4 shadow-2xl ${container.bgColor}`}
+            className={`w-full p-4 min-h-[20vh] flex flex-col gap-4 shadow-2xl rounded ${container.bgColor}`}
           >
             <h2
-              className={`font-bold text-lg text-center ${container.titleColor} p-2`}
+              className={`font-bold text-lg text-center ${container.titleColor} rounded p-2`}
             >
               {container.name}
             </h2>

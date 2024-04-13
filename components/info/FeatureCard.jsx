@@ -26,11 +26,11 @@ const FeatureCard = ({ feature, index }) => {
 
   return (
     <div
-      className={`feature-card ${bgColor} shadow-lg border border-black p-6 transform rotate-0 hover:rotate-2 transition-transform duration-300`}
+      className={`feature-card ${bgColor} shadow-lg border rounded border-black p-6 transform rotate-0 hover:rotate-2 transition-transform duration-300`}
     >
       <h3 className='text-lg font-semibold mb-2'>{title}</h3>
       <p className='text-gray-600'>{description}</p>
-      <button className='black_btn mt-5 try-now' onClick={handleSignIn}>
+      <button className='black_btn_mono mt-5 try-now' onClick={handleSignIn}>
         Try Now <HiArrowUpRight className='ml-2' />
       </button>
     </div>

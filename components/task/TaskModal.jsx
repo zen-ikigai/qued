@@ -116,7 +116,7 @@ const TaskModal = ({
 
   return (
     <div className='modal-backdrop font-mono '>
-      <div className='modal bg-blue-100 border border-black shadow-2xl'>
+      <div className='modal bg-blue-100 border border-black rounded shadow-2xl'>
         <h2 className='text-3xl font-bold text-center'>{heading}</h2>
         <form onSubmit={handleSubmit}>
           <label>Title</label>

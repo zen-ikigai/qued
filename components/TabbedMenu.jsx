@@ -33,6 +33,7 @@ const TabbedMenu = ({
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [searchQuery, setSearchQuery] = useState('')
   const [sortOrder, setSortOrder] = useState('creationDesc')
+  const [failureModalAddDummy, setFailureModalAddDummy] = useState(false)
 
   const handleSearchChange = e => {
     setSearchQuery(e.target.value)
@@ -45,6 +46,22 @@ const TabbedMenu = ({
   const handleSortChange = e => {
     setSortOrder(e.target.value)
   }
+
+  const handleAddDummyData = async () => {
+    try {
+      const response = await fetch(`/api/user/${userId}/addDummy`, {
+        method: 'POST',
+      });
+      if (response.ok) {
+        await fetchTasks(); // Refresh the list after adding
+      } else {
+        setFailureModalCreateTask(true)
+        update()
+      }
+    } catch (error) {
+      console.error('Failed to add dummy data:', error);
+    }
+  };
 
   // Helper function to filter tasks based on the tab, search query and sort order
   const filterTasks = tab => {
@@ -104,7 +121,7 @@ const TabbedMenu = ({
   }
 
   return (
-    <div className='border border-black shadow-lg'>
+    <div className='border border-black rounded shadow-lg'>
       <div className='tabs '>
         {['all', 'today', 'overdue', 'calendar'].map(tab => (
           <button
@@ -121,14 +138,14 @@ const TabbedMenu = ({
       </div>
 
       {/* Search Bar */}
-      <div className='flex sm:flex-row flex-col gap-5 items-center justify-center mt-7'>
+      <div className='flex sm:flex-row flex-col gap-5 items-center justify-center mt-7 '>
         <form className='relative sm:w-3/4 items-center justify-center'>
           <input
             type='text'
             value={searchQuery}
             onChange={handleSearchChange}
             placeholder='Search tasks by Title or Description...'
-            className='search_input'
+            className='search_input rounded'
           />
           {searchQuery && (
             <button
@@ -153,7 +170,7 @@ const TabbedMenu = ({
             </button>
           )}
         </form>
-        <select onChange={handleSortChange} className='w-1/6 sort_input'>
+        <select onChange={handleSortChange} className='w-1/6 sort_input rounded'>
           <option value='creationDesc'>Sort: Newest First</option>
           <option value='creationAsc'>Sort: Oldest First</option>
           <option value='dueDesc'>Sort: Due Date (Desc)</option>
@@ -161,10 +178,18 @@ const TabbedMenu = ({
         </select>
       </div>
 
+      {tasks.length === 0 && (
+        <div className='mt-5 flex items-center justify-center'>
+          <button onClick={handleAddDummyData} className='black_btn_mono'>
+            Add Dummy Data To Test
+          </button>
+        </div>
+      )}
+
       <div className='tab-content mt-2'>
         {activeTab === 'calendar' && (
-          <div className='mb-5 flex items-center justify-center'>
-            <Calendar onChange={setSelectedDate} value={selectedDate} />
+          <div className='mb-5 flex items-center justify-center '>
+            <Calendar onChange={setSelectedDate} value={selectedDate} className='rounded' />
           </div>
         )}
         <TaskBoard
@@ -191,6 +216,13 @@ const TabbedMenu = ({
           </button>
         ))}
       </div>
+      {failureModalAddDummy && (
+        <Failure
+          title='Failed'
+          message='Failed to add Dummy Tasks.'
+          onClose={() => setFailureModalAddDummy(false)}
+        />
+      )}
     </div>
   )
 }

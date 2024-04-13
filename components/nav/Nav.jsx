@@ -52,7 +52,7 @@ const Nav = () => {
             alt='Qued logo'
             width={55}
             height={55}
-            className='object-contain'
+            className='object-contain rounded'
           />
           <p className='logo_text '>Qued</p>
         </Link>
@@ -63,7 +63,7 @@ const Nav = () => {
             alt='Qued logo'
             width={55}
             height={55}
-            className='object-contain'
+            className='object-contain rounded'
           />
           <p className='logo_text'>Qued</p>
         </Link>
