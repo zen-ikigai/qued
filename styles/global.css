@@ -1,12 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 .flex-grow {
-    flex: 1;
+  flex: 1;
 }
 
 /*
@@ -15,8 +14,7 @@ Scrollbar customisation inspire from dev.to
 
 :root {
   --primary: white;
-  --secondary: black ;
-  
+  --secondary: black;
 }
 
 /* Firefox */
@@ -32,7 +30,6 @@ Scrollbar customisation inspire from dev.to
 
 *::-webkit-scrollbar-track {
   background: var(--primary);
-  
 }
 
 *::-webkit-scrollbar-thumb {
@@ -40,7 +37,6 @@ Scrollbar customisation inspire from dev.to
   border-radius: 14px;
   border: 3px solid var(--primary);
 }
-
 
 /* 
   Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
@@ -58,7 +54,7 @@ Scrollbar customisation inspire from dev.to
 .main:before {
   background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
   position: absolute;
-  content: "";
+  content: '';
   z-index: 2;
   width: 100%;
   height: 100%;
@@ -66,8 +62,8 @@ Scrollbar customisation inspire from dev.to
 }
 
 .main:after {
-  content: "";
-  background-image: url("/assets/images/grid.svg");
+  content: '';
+  background-image: url('/assets/images/grid.svg');
   z-index: 1;
   position: absolute;
   width: 100%;
@@ -94,7 +90,7 @@ Scrollbar customisation inspire from dev.to
     radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
     radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
   position: absolute;
-  content: "";
+  content: '';
   width: 100%;
   height: 100%;
   filter: blur(100px) saturate(150%);
@@ -110,7 +106,6 @@ Scrollbar customisation inspire from dev.to
 
 /* unlock section starts */
 
-
 .blur-section {
   position: relative;
   display: flex;
@@ -121,7 +116,6 @@ Scrollbar customisation inspire from dev.to
   width: 98vw;
   z-index: 1;
   overflow: hidden;
-  
 }
 
 .blur-overlay {
@@ -150,7 +144,7 @@ Scrollbar customisation inspire from dev.to
 .lock-icon {
   width: 40px;
   height: 40px;
-  background-image: url("/assets/icons/lock.svg");
+  background-image: url('/assets/icons/lock.svg');
   background-size: cover;
 }
 
@@ -171,10 +165,10 @@ Scrollbar customisation inspire from dev.to
   }
 
   .unlock-section {
-    top: 50%;  /* Adjust positioning */
+    top: 50%; /* Adjust positioning */
     left: 50%;
     width: 90%;
-    height: 25vh;  /* Let the content determine the height */
+    height: 25vh; /* Let the content determine the height */
     padding: 10px; /* Adjust padding */
   }
 }
@@ -186,22 +180,19 @@ Scrollbar customisation inspire from dev.to
     width: 100%;
     overflow: hidden;
   }
-  
+
   .unlock-section {
-    top: 50%;  /* Adjust positioning */
+    top: 50%; /* Adjust positioning */
     left: 50%;
     width: 90%;
-    height: 25vh;  /* Let the content determine the height */
+    height: 25vh; /* Let the content determine the height */
     padding: 10px; /* Adjust padding */
   }
 }
 
 /* unlock section ends */
 
-
-
-
-.opacity-10{
+.opacity-10 {
   opacity: 0.1;
 }
 
@@ -224,9 +215,7 @@ Scrollbar customisation inspire from dev.to
 
 .outline_btn_mono {
   @apply rounded border border-black bg-blue-50 py-2.5 px-5 text-gray-800 transition-all hover:bg-black hover:text-white text-center text-sm font-mono flex items-center justify-center;
-
 }
-
 
 .tab_btn {
   cursor: pointer;
@@ -249,21 +238,17 @@ Scrollbar customisation inspire from dev.to
   color: #000000;
 }
 
-
 .head_text {
   @apply mt-5 text-4xl font-extrabold leading-[1.15] text-black md:text-6xl;
 
   @media screen and (max-width: 640px) {
     width: 85%;
-    
   }
 }
 
 .orange_gradient {
   @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
 }
-
-
 
 .green_gradient {
   @apply bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent;
@@ -275,7 +260,6 @@ Scrollbar customisation inspire from dev.to
 .pastel_gradient {
   @apply bg-gradient-to-r from-red-300 via-yellow-300 to-green-300 bg-clip-text text-transparent;
 }
-
 
 .desc {
   @apply mt-5 text-lg text-gray-600 sm:text-xl max-w-2xl;
@@ -343,7 +327,7 @@ Scrollbar customisation inspire from dev.to
 
 /* Nav Component */
 .logo_text {
-  @apply  font-mono font-semibold text-lg text-gray-800 tracking-wide;
+  @apply font-mono font-semibold text-lg text-gray-800 tracking-wide;
 }
 
 .dropdown {
@@ -364,7 +348,6 @@ Scrollbar customisation inspire from dev.to
     min-width: 90vw;
   }
 }
-
 
 .flex-center {
   @apply flex justify-center items-center;
@@ -392,8 +375,6 @@ Scrollbar customisation inspire from dev.to
   }
 }
 
-
-
 html,
 body {
   height: 100%;
@@ -418,7 +399,6 @@ body {
   transition: width 0.3s ease;
   z-index: 100;
 }
-
 
 .nav-item {
   display: flex;
@@ -445,13 +425,10 @@ body {
   margin-top: auto;
 }
 
-
-
 .nav-icon {
   width: 20px;
-  height: 20px;  
+  height: 20px;
 }
-
 
 .shift-left {
   margin-left: 30px;
@@ -507,14 +484,14 @@ body {
   display: flex;
   flex-direction: row;
   margin-left: 0px;
-  align-items: flex-end;  
+  align-items: flex-end;
 }
 
 .add-data-btn {
   display: flex;
   flex-direction: row;
   margin-left: 0;
-  align-items: flex-end;  
+  align-items: flex-end;
 }
 
 .role-switcher {
@@ -526,7 +503,9 @@ body {
   margin-left: 10px;
   color: #fff;
   background-color: #000;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 
 .role-switcher:focus {
@@ -547,7 +526,6 @@ body {
   background-color: #000;
 }
 
-
 .nav-links {
   display: flex;
   align-items: center;
@@ -561,19 +539,16 @@ body {
   text-decoration: none;
 }
 
-
-
 /* Container for the tab buttons */
 .tabs {
   display: flex;
   justify-content: space-around;
-  border-bottom: 1px solid
+  border-bottom: 1px solid;
 }
 .tabs-bottom {
   display: flex;
   justify-content: space-around;
-  border-top: 1px solid ;
- 
+  border-top: 1px solid;
 }
 
 /* Style for each tab button */
@@ -596,7 +571,6 @@ body {
   transition: background-color 0.3s ease;
 }
 
-
 /* Style for the active tab button */
 .tabs button.active {
   border-bottom: 3px solid #007bff;
@@ -613,8 +587,6 @@ body {
 /* Container for the content shown when a tab is selected */
 .tab-content {
   padding: 20px;
- 
-  
 }
 
 /* Basic styling for the TaskBoard for visual separation of tasks */
@@ -642,7 +614,6 @@ body {
   z-index: 1000; /* Ensure it's above other content */
 }
 
-
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -657,9 +628,8 @@ body {
 }
 
 .modal {
-  
   padding: 20px;
-  
+
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 500px;
@@ -678,9 +648,9 @@ body {
   margin-top: 10px;
 }
 
-.modal input[type="text"],
-.modal input[type="datetime-local"],
-.modal input[type="number"],
+.modal input[type='text'],
+.modal input[type='datetime-local'],
+.modal input[type='number'],
 .modal textarea,
 .modal select {
   padding: 8px;
@@ -689,16 +659,11 @@ body {
   border-radius: 4px;
 }
 
-
-
-
-
 .profile-container {
   max-width: 600px;
   margin: 20px auto;
   padding: 20px;
-  
- 
+
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -709,11 +674,12 @@ body {
 .profile-image {
   width: 100px;
   height: 100px;
-  
+
   object-fit: cover;
 }
 
-.username, .email {
+.username,
+.email {
   margin: 10px 0;
 }
 
@@ -765,11 +731,10 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;  
+  right: 0;
   padding-left: 5%;
   padding-right: 5%;
-  z-index: 1000;  
-  
+  z-index: 1000;
 }
 
 .body-content {
@@ -808,7 +773,6 @@ body {
 }
 
 .feature-card {
-  
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin: 20px;
   transition: transform 0.3s ease;
@@ -817,8 +781,6 @@ body {
 .feature-card:hover {
   transform: rotate(0); /* Rotates back to 0 degrees on hover */
 }
-
-
 
 /* Footer Styles */
 .footer {
