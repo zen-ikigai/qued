@@ -10,21 +10,21 @@ const createDummyTasks = () => {
         description: "Lorem Ipsum Dolor",
         status: "todo",
         dueDate: new Date(baseDate.getTime() + ((i - 1) * 2 * 86400000)), // -2, 0, +2 days
-        reminder: true,
+        reminder: false,
       })),
       ...Array.from({ length: 3 }).map((_, i) => ({
         title: `Task ${i + 4}`,
         description: "Lorem Ipsum",
         status: "inProgress",
         dueDate: new Date(baseDate.getTime() + ((i - 1) * 2 * 86400000)), // -2, 0, +2 days
-        reminder: true,
+        reminder: false,
       })),
       ...Array.from({ length: 3 }).map((_, i) => ({
         title: `Task ${i + 7}`,
         description: "Lorem Ipsum",
         status: "done",
         dueDate: new Date(baseDate.getTime() + ((i - 1) * 2 * 86400000)), // -2, 0, +2 days
-        reminder: true,
+        reminder: false,
       })),
     ];
   };

@@ -24,6 +24,7 @@ const Dashboard = () => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [currentTask, setCurrentTask] = useState(null)
   const [isEditing, setIsEditing] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [failureModalFetchTasks, setFailureModalFetchTasks] = useState(false)
   const [failureModalDeleteTask, setFailureModalDeleteTask] = useState(false)
   const [failureModalChangeStatus, setFailureModalChangeStatus] =
@@ -54,7 +55,7 @@ const Dashboard = () => {
     }
   }, [session])
 
-  if (status === 'loading' || !session) {
+  if (status === 'loading' || !session || loading) {
     return <Loading />
   }
 
@@ -144,6 +145,7 @@ const Dashboard = () => {
         handleDelete={handleDelete}
         handleEdit={handleEdit}
         handleStatusChange={handleStatusChange}
+        setLoading={setLoading}
       />
       <CreateTaskIcon fetchTasks={fetchTasks} />
       {isEditModalOpen && (

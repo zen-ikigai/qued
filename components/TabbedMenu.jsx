@@ -3,6 +3,7 @@ import TaskBoard from './desktopTaskView/TaskBoard'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import { HiCalendar } from 'react-icons/hi'
+import Loading from './info/Loading'
 
 /**
  * Component that manages the task viewing experience, including filtering,
@@ -28,12 +29,14 @@ const TabbedMenu = ({
   handleDelete,
   handleEdit,
   handleStatusChange,
+  setLoading,
 }) => {
   const [activeTab, setActiveTab] = useState('all')
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [searchQuery, setSearchQuery] = useState('')
   const [sortOrder, setSortOrder] = useState('creationDesc')
   const [failureModalAddDummy, setFailureModalAddDummy] = useState(false)
+  
 
   const handleSearchChange = e => {
     setSearchQuery(e.target.value)
@@ -48,6 +51,7 @@ const TabbedMenu = ({
   }
 
   const handleAddDummyData = async () => {
+    setLoading(true)
     try {
       const response = await fetch(`/api/user/${userId}/addDummy`, {
         method: 'POST',
@@ -58,8 +62,10 @@ const TabbedMenu = ({
         setFailureModalCreateTask(true)
         update()
       }
+      setLoading(false);
     } catch (error) {
       console.error('Failed to add dummy data:', error);
+      setLoading(false)
     }
   };
 

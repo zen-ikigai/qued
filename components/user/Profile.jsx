@@ -98,7 +98,7 @@ const Profile = ({ tasks, setLoading }) => {
 
       <div className='profile-stats flex sm:flex-row flex-col items-center justify-center '>
         <div className='stat-item'>
-          <span className='stat-value'>{session?.user.tasks.length}</span>
+          <span className='stat-value'>{tasks.length}</span>
           <span className='stat-label'>Total Tasks</span>
         </div>
         <div className='stat-item'>
