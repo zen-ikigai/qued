@@ -1,8 +1,29 @@
+/**
+ * A component that renders a card for displaying task details. It shows the task's title, description, due date, creation date, and reminder status.
+ * The date is formatted to a more readable format using the `formatDate` function.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {Object} props.task - Task object containing details about the task.
+ * @param {string} props.task.title - Title of the task.
+ * @param {string} props.task.description - Description of the task.
+ * @param {Date} props.task.dueDate - Due date of the task.
+ * @param {Date} props.task.createdAt - Creation date of the task.
+ * @param {boolean} props.task.reminder - Indicates whether a reminder is set for the task.
+ * @returns {ReactElement} Rendered component.
+ */
 const TaskCard = ({ task }) => {
+  /**
+   * Formats a date into a string with the format "DD MMM YYYY | HH:MM", e.g., "12 Jan 2024 | 15:30".
+   * Uses the user's local timezone.
+   *
+   * @function formatDate
+   * @param {Date|string} date - The date to format.
+   * @returns {string} The formatted date string.
+   */
   const formatDate = date => {
     if (!date) return ''
     const d = new Date(date)
-    // Format the date and time in local timezone
     const year = d.getFullYear()
     const months = [
       'Jan',
@@ -27,7 +48,7 @@ const TaskCard = ({ task }) => {
   }
 
   return (
-    <div className=' border-b border-black p-4 text-black '>
+    <div className='border-b border-black p-4 text-black'>
       <div>
         <h3 className='text-xl font-bold'>{task.title}</h3>
         <p className='text-lg mt-2 border-b border-gray-400 pb-3'>

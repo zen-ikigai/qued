@@ -1,3 +1,13 @@
+/**
+ * Dashboard component that manages the main user interface for interacting with tasks.
+ * It handles task fetching, deletion, editing, and status updates.
+ * This component is protected by the `withAuth` higher-order component to ensure it's only accessible to authenticated users.
+ *
+ * @component
+ * @example
+ * return <Dashboard />
+ */
+
 'use client'
 import { useEffect, useState } from 'react'
 import TabbedMenu from '@/components/TabbedMenu'
@@ -19,6 +29,10 @@ const Dashboard = () => {
   const [failureModalChangeStatus, setFailureModalChangeStatus] =
     useState(false)
 
+  /**
+   * Fetches tasks from the backend API and updates the state.
+   * Sets a failure modal if the fetch is unsuccessful.
+   */
   const fetchTasks = async () => {
     const response = await fetch(`/api/user/${session?.user.id}/gettasks`, {
       method: 'GET',
@@ -31,16 +45,20 @@ const Dashboard = () => {
     }
   }
 
+  /**
+   * Effect hook to fetch tasks when a session is established.
+   */
   useEffect(() => {
     if (session?.user) {
       fetchTasks()
     }
   }, [session])
 
-  if (status === 'loading' || !session) {
-    return <Loading />
-  }
-
+  /**
+   * Handles deletion of a task. Updates the task list optimistically and reverts if the deletion fails.
+   * @param {string} taskId - ID of the task to delete.
+   * @param {string} userId - ID of the user performing the deletion.
+   */
   const handleDelete = async (taskId, userId) => {
     const removedTask = tasks.find(task => task._id === taskId)
     setTasks(prevTasks => prevTasks.filter(task => task._id !== taskId))
@@ -59,18 +77,26 @@ const Dashboard = () => {
       }
     } catch (error) {
       console.error('Error deleting task:', error)
-      // Revert the UI back to its previous state by adding the removed task back
       setTasks(prevTasks => [...prevTasks, removedTask])
       setFailureModalDeleteTask(true)
       update()
     }
   }
 
+  /**
+   * Opens the modal for editing a task.
+   * @param {object} task - Task object to edit.
+   */
   const handleEdit = task => {
-    setCurrentTask(task) // Set the task to be edited
-    setIsEditModalOpen(true) // Open the modal
+    setCurrentTask(task)
+    setIsEditModalOpen(true)
   }
 
+  /**
+   * Handles status updates for tasks. Optimistically updates the task status and reverts if the update fails.
+   * @param {string} taskId - ID of the task to update.
+   * @param {string} newStatus - New status for the task.
+   */
   const handleStatusChange = async (taskId, newStatus) => {
     setTasks(prevTasks =>
       prevTasks.map(task =>
@@ -79,7 +105,6 @@ const Dashboard = () => {
     )
 
     try {
-      // API call to update the status in the backend
       const response = await fetch(
         `/api/task/${taskId}/changestatus?userId=${session?.user.id}`,
         {
@@ -95,7 +120,6 @@ const Dashboard = () => {
       }
     } catch (error) {
       console.error('Error updating task status:', error)
-      // Rollback to previous state in case of an error
       setTasks(prevTasks =>
         prevTasks.map(task =>
           task._id === taskId ? { ...task, status: task.status } : task,

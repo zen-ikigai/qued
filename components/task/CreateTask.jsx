@@ -1,19 +1,30 @@
 import React, { useState } from 'react'
-import { HiOutlinePencilAlt, HiPencil, HiPlusCircle } from 'react-icons/hi'
+import { HiPlusCircle } from 'react-icons/hi'
 import TaskModal from './TaskModal'
 import { useSession } from 'next-auth/react'
 
+/**
+ * A component that provides an interactive icon to open a modal for creating a new task.
+ *
+ * @param {Object} props - Component props.
+ * @param {Function} props.fetchTasks - Function to fetch tasks after creation.
+ * @returns {React.Element} The rendered component with an icon and a modal for task creation.
+ */
 const CreateTaskIcon = ({ fetchTasks }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { data: session, status, update } = useSession()
+  const { data: session } = useSession()
   const [isEditing, setIsEditing] = useState(false)
+
+  /**
+   * Toggles the visibility of the task creation modal.
+   */
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
   }
 
   return (
     <div>
-      {/* Pencil Icon */}
+      {/* Icon for opening the task creation modal */}
       <div className='create-task-icon sm:flex hidden' onClick={toggleModal}>
         <HiPlusCircle className='w-10 h-10' />
       </div>
@@ -21,7 +32,7 @@ const CreateTaskIcon = ({ fetchTasks }) => {
         <HiPlusCircle className='w-8 h-8' />
       </div>
 
-      {/* New Task Modal */}
+      {/* Task Modal for creating a new task */}
       {isModalOpen && (
         <TaskModal
           buttonName='Create Task'

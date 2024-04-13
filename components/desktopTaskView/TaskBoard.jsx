@@ -1,3 +1,20 @@
+/**
+ * A component that implements a task board with draggable tasks organized in different containers.
+ * It utilizes the `@dnd-kit/core` for drag-and-drop functionality and `@dnd-kit/sortable` for sorting tasks within containers.
+ * The board supports drag-and-drop reordering of tasks within the same or different status categories.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {Array} props.tasks - Array of task objects to display.
+ * @param {Function} props.setTasks - Function to update the list of tasks in the parent component.
+ * @param {string} props.userId - User ID of the task owner, used in task operations.
+ * @param {Function} props.fetchTasks - Function to fetch tasks from the backend.
+ * @param {Function} props.handleDelete - Function to delete a task.
+ * @param {Function} props.handleEdit - Function to edit a task.
+ * @param {Function} props.handleStatusChange - Function to change the status of a task.
+ * @returns {ReactElement} Rendered component.
+ */
+
 import React, { useState, useEffect } from 'react'
 import {
   DndContext,

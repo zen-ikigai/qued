@@ -1,5 +1,9 @@
-import React from 'react'
-
+/**
+ * Displays a fullscreen loading indicator.
+ *
+ * @function Loading
+ * @returns {React.Element} A full-screen modal with a loading spinner animation.
+ */
 const Loading = () => {
   return (
     <div className='loading-backdrop'>

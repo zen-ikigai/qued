@@ -1,5 +1,13 @@
-import React from 'react'
-
+/**
+ * Displays a modal for successful operations, including a title and message.
+ *
+ * @function Success
+ * @param {Object} props - The component props.
+ * @param {string} props.title - The title of the success message.
+ * @param {string} props.message - The content of the success message.
+ * @param {Function} props.onClose - The function to call when the "OK" button is clicked.
+ * @returns {React.Element} A modal with a success message and an "OK" button to dismiss the modal.
+ */
 const Success = ({ title, message, onClose }) => {
   return (
     <div className='fixed inset-0 flex items-center justify-center z-50'>

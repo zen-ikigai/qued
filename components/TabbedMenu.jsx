@@ -4,6 +4,22 @@ import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import { HiCalendar } from 'react-icons/hi'
 
+/**
+ * Component that manages the task viewing experience, including filtering,
+ * sorting, and task management actions within different views like "All", "Today",
+ * "Overdue", and "Calendar".
+ *
+ * @param {Object} props - Component props.
+ * @param {Array} props.tasks - List of tasks to be managed.
+ * @param {Function} props.setTasks - Function to update the list of tasks.
+ * @param {string} props.userId - ID of the current user.
+ * @param {Function} props.fetchTasks - Function to fetch tasks from the backend.
+ * @param {Function} props.handleDelete - Function to handle the deletion of a task.
+ * @param {Function} props.handleEdit - Function to handle editing of a task.
+ * @param {Function} props.handleStatusChange - Function to handle changes in task status.
+ * @returns {React.Element} The rendered component.
+ */
+
 const TabbedMenu = ({
   tasks,
   setTasks,
@@ -30,7 +46,7 @@ const TabbedMenu = ({
     setSortOrder(e.target.value)
   }
 
-  // Helper function to filter tasks based on the tab and search query
+  // Helper function to filter tasks based on the tab, search query and sort order
   const filterTasks = tab => {
     const now = new Date()
     now.setHours(0, 0, 0, 0) // Set time to 00:00:00

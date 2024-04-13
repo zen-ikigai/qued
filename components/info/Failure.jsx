@@ -1,5 +1,13 @@
-import React from 'react'
-
+/**
+ * Displays a modal for failure notifications with an "OK" button to close the modal.
+ *
+ * @function Failure
+ * @param {Object} props - The component props.
+ * @param {string} props.title - The title of the failure notification.
+ * @param {string} props.message - Descriptive text about the failure.
+ * @param {Function} props.onClose - Handler to call when the "OK" button is clicked.
+ * @returns {React.Element} A styled modal that informs the user of a failure.
+ */
 const Failure = ({ title, message, onClose }) => {
   return (
     <div className='fixed inset-0 flex items-center justify-center z-50'>

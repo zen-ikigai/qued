@@ -2,7 +2,12 @@
 import React, { useState } from 'react'
 import { useSession } from 'next-auth/react'
 import Failure from '../info/Failure'
-
+/**
+ * Formats a JavaScript Date object into a datetime-local input friendly format.
+ *
+ * @param {Date} date - The date object to format.
+ * @returns {string} - The formatted date string.
+ */
 const formatDate = date => {
   if (!date) return ''
   const d = new Date(date)
@@ -14,6 +19,20 @@ const formatDate = date => {
   const minutes = d.getMinutes().toString().padStart(2, '0') // Convert minutes to 2-digits
   return `${year}-${month}-${day}T${hours}:${minutes}`
 }
+
+/**
+ * A modal component for creating or editing tasks.
+ *
+ * @param {Object} props - Component props.
+ * @param {Function} props.fetchTasks - Function to refresh the tasks list upon successful submission.
+ * @param {Function} props.handleModal - Function to toggle the visibility of the modal.
+ * @param {string} props.apiEndpoint - API endpoint for submitting the task data.
+ * @param {string} props.buttonName - Name to display on the submission button.
+ * @param {string} props.heading - Text to display as the modal's heading.
+ * @param {boolean} props.isEditing - Indicates if the modal is used for editing an existing task.
+ * @param {Object} props.taskToEdit - The task data that is being edited, if applicable.
+ * @returns {React.Element} - The rendered component.
+ */
 
 const TaskModal = ({
   fetchTasks,

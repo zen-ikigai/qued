@@ -7,6 +7,16 @@ import Delete from '../info/DeleteConfirmation'
 import Success from '../info/Success'
 import Failure from '../info/Failure'
 
+/**
+ * Component to display and manage user's profile and tasks.
+ * Allows deletion of all tasks or the user profile.
+ *
+ * @param {Object} props - Component props.
+ * @param {Array} props.tasks - Array of tasks associated with the user.
+ * @param {Function} props.setLoading - Function to control the loading state.
+ * @returns {React.Element} - The rendered component.
+ */
+
 const Profile = ({ tasks, setLoading }) => {
   const { data: session, status, update } = useSession()
   const completedTasksCount = tasks.filter(

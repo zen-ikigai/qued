@@ -1,3 +1,30 @@
+/**
+ * A component representing a draggable task card that can be sorted within a draggable context.
+ * It uses the `@dnd-kit/sortable` library to enable drag-and-drop functionality.
+ * This component renders task details and provides interactive elements to edit,
+ * delete, or change the status of the task.
+ *
+ * @component
+ * @param {Object} props - Component props.
+ * @param {string} props.id - Unique identifier for the task, used for drag-and-drop.
+ * @param {Object} props.task - The task object containing details like title, description, etc.
+ * @param {Function} props.handleDelete - Function to call when the delete button is clicked.
+ * @param {string} props.userId - User ID of the task owner, used in deletion logic.
+ * @param {Function} props.handleEdit - Function to call when the edit button is clicked.
+ * @param {Function} props.handleStatusChange - Function to handle changing the status of the task.
+ * @returns {ReactElement} Rendered component.
+ *
+ * @example
+ * <SortableTask
+ *   id={task.id}
+ *   task={task}
+ *   handleDelete={handleDelete}
+ *   userId={userId}
+ *   handleEdit={handleEdit}
+ *   handleStatusChange={handleStatusChange}
+ * />
+ */
+
 import React, { useState, useEffect } from 'react'
 import { useSortable } from '@dnd-kit/sortable'
 import { useDndMonitor } from '@dnd-kit/core'

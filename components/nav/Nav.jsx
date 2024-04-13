@@ -1,29 +1,23 @@
 'use client'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 import {
   HiHome,
-  HiSearch,
-  HiBookmark,
-  HiPlusCircle,
-  HiArrowSmUp,
-  HiCheckCircle,
-  HiOutlineHome,
-  HiOutlineSearch,
-  HiOutlineBookmark,
-  HiOutlinePlusCircle,
-  HiMail,
-  HiOutlineMail,
-  HiOutlineLogout,
-  HiSearchCircle,
   HiArrowRight,
   HiLogout,
-  HiQuestionMarkCircle,
-  HiOutlineQuestionMarkCircle,
+  HiArrowSmUp,
+  HiOutlineHome,
 } from 'react-icons/hi'
 import { usePathname } from 'next/navigation'
+
+/**
+ * Navigation component providing links and actions for user interaction.
+ * Includes both desktop and mobile versions.
+ *
+ * @returns {React.Element} The rendered navigation component.
+ */
 
 const Nav = () => {
   const { data: session } = useSession()

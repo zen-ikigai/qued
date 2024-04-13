@@ -1,16 +1,26 @@
 import { HiArrowUpRight } from 'react-icons/hi2'
 import { handleSignIn } from '../auth/Login'
 
-const colors = [
-  'bg-blue-100',
-  'bg-red-100',
-  'bg-purple-100',
-  'bg-green-100',
-  'bg-pink-100',
-  'bg-yellow-100',
-]
-
+/**
+ * Displays a feature card with a title, description, and a "Try Now" button.
+ * Cards use a cycling color scheme based on their index.
+ *
+ * @function FeatureCard
+ * @param {Object} props - The component props.
+ * @param {Object} props.feature - The feature object containing the title and description.
+ * @param {number} props.index - The index of the feature in the feature list to determine background color.
+ * @returns {React.Element} A stylized feature card with hover effect and interactive elements.
+ */
 const FeatureCard = ({ feature, index }) => {
+  const colors = [
+    'bg-blue-100',
+    'bg-red-100',
+    'bg-purple-100',
+    'bg-green-100',
+    'bg-pink-100',
+    'bg-yellow-100',
+  ]
+
   const { title, description } = feature
   const bgColor = colors[index % colors.length] // Cycle through colors based on index
 
