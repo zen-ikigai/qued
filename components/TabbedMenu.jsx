@@ -3,7 +3,6 @@ import TaskBoard from './desktopTaskView/TaskBoard'
 import Calendar from 'react-calendar'
 import 'react-calendar/dist/Calendar.css'
 import { HiCalendar } from 'react-icons/hi'
-import Loading from './info/Loading'
 
 /**
  * Component that manages the task viewing experience, including filtering,
