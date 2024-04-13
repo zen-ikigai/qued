@@ -84,5 +84,3 @@ Contributions are welcome! Here’s how you can contribute:
 ## Future Enhancements
 
 - **Notifications**: Integration with Amazon SES for task reminders and notifications is in progress. Exploring the use of a Node.js server with cron job capabilities for scheduled notifications. Exploring different modes of notifications like SMS, Push Notifications etc.
-
-```
