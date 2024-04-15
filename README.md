@@ -76,7 +76,7 @@ Before you begin, ensure you have the following installed:
 - **API Testing**: Extensively tested with Postman to ensure API reliability and performance.
 - **Responsive Testing**: Utilized browser developer tools to ensure a seamless user experience on various devices.
 - **Performance and Accessibility**: Enhanced with Lighthouse to optimize performance, accessibility, SEO, and best practices.
-- **Security Measures**: Implemented HOC and basic security practices, including secure HTTP headers, authenticated flows and data validation to protect against common vulnerabilities.
+- **Security Measures**: Implemented middleware for authenticated access and basic security practices, including secure HTTP headers, authenticated flows and data validation to protect against common vulnerabilities.
 
 ## Contributing
 
