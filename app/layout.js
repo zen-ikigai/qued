@@ -3,8 +3,8 @@ import Provider from '@/components/auth/Provider'
 import Footer from '@/components/nav/Footer'
 import '@/styles/background.scss'
 import Nav from '@/components/nav/Nav'
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export const metadata = {
   title: 'Qued',
@@ -23,8 +23,8 @@ export default function RootLayout({ children }) {
             <Nav />
             <main className='flex-grow'>
               {children}
-              <Analytics/>
-              <SpeedInsights/>
+              <Analytics />
+              <SpeedInsights />
             </main>
             <Footer />
           </div>

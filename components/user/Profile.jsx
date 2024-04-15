@@ -91,8 +91,12 @@ const Profile = ({ tasks, setLoading }) => {
           className='profile-image rounded'
         />
         <div>
-          <h1 className='text-2xl'>{session?.user.username}</h1>
-          <p className='text-sm'>{session?.user.email}</p>
+          <h1 className='text-2xl sm:text-left text-center'>
+            {session?.user.username}
+          </h1>
+          <p className='text-sm sm:text-left text-center'>
+            {session?.user.email}
+          </p>
         </div>
       </div>
 

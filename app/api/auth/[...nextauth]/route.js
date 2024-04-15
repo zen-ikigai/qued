@@ -13,14 +13,18 @@ const handler = NextAuth({
 
   callbacks: {
     async session({ session }) {
-      const sessionUser = await User.findOne({
-        email: session.user.email,
-      })
+      if (!session?.user?.email) return session
 
-      session.user.id = sessionUser._id.toString()
-      session.user.image = sessionUser.image
-      session.user.username = sessionUser.username
-      session.user.tasks = sessionUser.tasks
+      const user = await User.findOne({ email: session.user.email }).lean()
+      if (!user) return session
+
+      session.user = {
+        ...session.user,
+        id: user._id.toString(),
+        username: user.username,
+        image: user.image,
+        tasks: user.tasks,
+      }
       return session
     },
 
@@ -28,8 +32,8 @@ const handler = NextAuth({
       try {
         await connectToDB()
 
-        const userExists = await User.findOne({ email: profile.email })
-        if (!userExists) {
+        let user = await User.findOne({ email: profile.email }).lean()
+        if (!user) {
           const name = profile.name.split(' ')
           const firstName = name[0] || '.'
           const lastName = name.slice(1).join(' ') || '.'
@@ -40,14 +44,14 @@ const handler = NextAuth({
           )
           const data = await response.json()
           const profileImage = data.image[0]
-
-          await User.create({
+          const newUser = {
             email: profile.email,
             username: username,
             image: profileImage,
-          })
+          }
+          user = await new User(newUser).save()
         }
-        return true
+        return user != null
       } catch (error) {
         console.log(error)
       }
