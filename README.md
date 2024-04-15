@@ -18,7 +18,7 @@ Visit the demo here: [Qued](https://qued-pesto.vercel.app/)
 - **Advanced Sorting**: Sort tasks by creation date, and due date.
 - **Personalised Profile**: Profile with analytics, 1-Click tasks and profile delete.
 - **Responsive UI**: A mobile first interface ideal for both mobile and desktop users alike.
-- **Custom Unique Avatars**: Every user gets a unique avatar from the [HueMan API.](https://hueman.space)
+- **Custom Unique Avatars**: Every user gets a unique avatar from the [HueMan API.](https://hueman.space) developed by me.
 
 ## Technology Stack
 
@@ -91,3 +91,4 @@ Contributions are welcome! Here’s how you can contribute:
 ## Future Enhancements
 
 - **Notifications**: Integration with Amazon SES for task reminders and notifications is in progress. Exploring the use of a Node.js server with cron job capabilities for scheduled notifications. Exploring different modes of notifications like SMS, Push Notifications etc.
+- **Trash**: A Recycle bin feature where deleted tasks go and stay for 24 hours before being permanently deleted with an option to restore them.
