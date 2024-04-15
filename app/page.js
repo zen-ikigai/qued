@@ -6,10 +6,7 @@
  * @example
  * return <Home />
  */
-
 'use client'
-
-import withoutAuth from '@/components/hoc/withoutAuth'
 import { handleSignIn } from '@/components/auth/Login'
 import { HiArrowRight } from 'react-icons/hi'
 import FeatureCard from '@/components/info/FeatureCard'
@@ -88,4 +85,4 @@ const Home = () => {
   )
 }
 
-export default withoutAuth(Home)
+export default Home

@@ -15,7 +15,6 @@ import CreateTaskIcon from '@/components/task/CreateTask'
 import { useSession } from 'next-auth/react'
 import TaskModal from '@/components/task/TaskModal'
 import Loading from '@/components/info/Loading'
-import withAuth from '@/components/hoc/withAuth'
 import Failure from '@/components/info/Failure'
 
 const Dashboard = () => {
@@ -184,4 +183,4 @@ const Dashboard = () => {
   )
 }
 
-export default withAuth(Dashboard)
+export default Dashboard

@@ -13,7 +13,6 @@ import React, { useEffect, useState } from 'react'
 import Profile from '@/components/user/Profile'
 import { useSession } from 'next-auth/react'
 import Loading from '@/components/info/Loading'
-import withAuth from '@/components/hoc/withAuth'
 
 const ProfilePage = () => {
   const { data: session, status, update } = useSession()
@@ -60,4 +59,4 @@ const ProfilePage = () => {
   return <Profile tasks={tasks} setLoading={setLoading} />
 }
 
-export default withAuth(ProfilePage)
+export default ProfilePage
