@@ -2,9 +2,17 @@ import { NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
 export async function middleware(request) {
-    const session = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
     const { pathname } = request.nextUrl;
 
+    // Skip middleware for static files and API calls
+    if (pathname.includes('/_next') || pathname.startsWith('/api') || pathname.startsWith('/assets')) {
+        return NextResponse.next();
+    }
+
+    const session = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+
+    console.log("Session:", session);  // Check if the session is being retrieved correctly
+    console.log("Pathname:", request.nextUrl.pathname);  // Check the current path
     // If the user is trying to access the home page while authenticated, redirect to dashboard
     if (session && pathname === '/') {
         const url = request.nextUrl.clone();
