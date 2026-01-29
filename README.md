@@ -93,3 +93,4 @@ Contributions are welcome! Here’s how you can contribute:
 
 - **Notifications**: Integration with Amazon SES for task reminders and notifications is in progress. Exploring the use of a Node.js server with cron job capabilities for scheduled notifications. Exploring different modes of notifications like SMS, Push Notifications etc.
 - **Trash**: A Recycle bin feature where deleted tasks go and stay for 24 hours before being permanently deleted with an option to restore them.
+
